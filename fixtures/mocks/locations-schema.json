@@ -1,0 +1,185 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "required": [
+        "message",
+        "terms",
+        "data"
+    ],
+    "properties": {
+        "message": {
+            "type": "string",
+            "description": "Response message"
+        },
+        "terms": {
+            "type": "string",
+            "description": "Terms of use and acceptable use policy"
+        },
+        "data": {
+            "type": "array",
+            "description": "Array of location objects",
+            "items": {
+                "type": "object",
+                "required": [
+                    "id",
+                    "name",
+                    "country",
+                    "siteCode",
+                    "networkRegion",
+                    "status"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Unique location identifier"
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Location name"
+                    },
+                    "campus": {
+                        "type": "string",
+                        "description": "Campus designation"
+                    },
+                    "metro": {
+                        "type": "string",
+                        "description": "Metro area"
+                    },
+                    "country": {
+                        "type": "string",
+                        "description": "Country name"
+                    },
+                    "siteCode": {
+                        "type": "string",
+                        "description": "Unique site code identifier"
+                    },
+                    "networkRegion": {
+                        "type": "string",
+                        "description": "Network region identifier"
+                    },
+                    "address": {
+                        "type": "object",
+                        "description": "Physical address",
+                        "properties": {
+                            "street": {
+                                "type": "string"
+                            },
+                            "suburb": {
+                                "type": "string"
+                            },
+                            "city": {
+                                "type": "string"
+                            },
+                            "country": {
+                                "type": "string"
+                            },
+                            "postcode": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "dc": {
+                        "type": "object",
+                        "description": "Data center information",
+                        "properties": {
+                            "id": {
+                                "type": "integer"
+                            },
+                            "name": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "market": {
+                        "type": "string",
+                        "description": "Market code"
+                    },
+                    "vRouterAvailable": {
+                        "type": "boolean",
+                        "description": "Whether vRouter is available"
+                    },
+                    "liveDate": {
+                        "type": "integer",
+                        "description": "Unix timestamp for live date"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "Active",
+                            "Inactive",
+                            "Pending"
+                        ],
+                        "description": "Location status"
+                    },
+                    "longitude": {
+                        "type": "number",
+                        "minimum": -180,
+                        "maximum": 180,
+                        "description": "Longitude coordinate"
+                    },
+                    "latitude": {
+                        "type": "number",
+                        "minimum": -90,
+                        "maximum": 90,
+                        "description": "Latitude coordinate"
+                    },
+                    "products": {
+                        "type": "object",
+                        "description": "Available products at location",
+                        "properties": {
+                            "mcr": {
+                                "type": "boolean"
+                            },
+                            "mcrVersion": {
+                                "type": "integer"
+                            },
+                            "megaport": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            },
+                            "mve": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object"
+                                }
+                            },
+                            "mcr1": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            },
+                            "mcr2": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer"
+                                }
+                            }
+                        }
+                    },
+                    "ordering_message": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "description": "Message about ordering"
+                    },
+                    "diversityZones": {
+                        "type": "object",
+                        "description": "Diversity zones information"
+                    },
+                    "productCapacityMap": {
+                        "type": [
+                            "object",
+                            "null"
+                        ],
+                        "description": "Product capacity mapping"
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": true
+}
