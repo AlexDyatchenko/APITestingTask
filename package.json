@@ -8,7 +8,18 @@
   "devDependencies": {
     "@faker-js/faker": "^10.2.0",
     "@playwright/test": "^1.57.0",
+    "@types/k6": "^1.5.0",
     "@types/node": "^25.0.9"
   },
-  "scripts": {}
+  "scripts": {
+    "test:api": "npx playwright test",
+    "test:api:headed": "npx playwright test --headed",
+    "test:api:ui": "npx playwright test --ui",
+    "k6:smoke": "cd k6 && ./run-tests.sh smoke",
+    "k6:load": "cd k6 && ./run-tests.sh load",
+    "k6:stress": "cd k6 && ./run-tests.sh stress",
+    "k6:spike": "cd k6 && ./run-tests.sh spike",
+    "k6:soak": "cd k6 && ./run-tests.sh soak",
+    "k6:all": "cd k6 && ./run-tests.sh all"
+  }
 }

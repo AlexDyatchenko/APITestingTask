@@ -1,0 +1,226 @@
+╔══════════════════════════════════════════════════════════════════════════════╗
+║                   K6 PERFORMANCE TEST SUITE COMPLETE                         ║
+║                      /v2/locations API Endpoint                              ║
+╚══════════════════════════════════════════════════════════════════════════════╝
+
+📦 CREATED FILES (13 total)
+═══════════════════════════════════════════════════════════════════════════════
+
+Test Scripts (5):
+  ✓ smoke.test.js       - 1 VU × 1 min      (Quick validation)
+  ✓ load.test.js        - 50 VUs × 14 min   (Normal load)
+  ✓ stress.test.js      - 250 VUs × 15 min  (Breaking point)
+  ✓ spike.test.js       - 300 VUs × 10 min  (Sudden spikes)
+  ✓ soak.test.js        - 30 VUs × 2 hours  (Long-term stability)
+
+Configuration:
+  ✓ config.js           - Shared utilities and constants
+  ✓ run-tests.sh        - Test runner with colored output (executable)
+  ✓ .env.example        - Environment template
+  ✓ .gitignore          - Git ignore rules
+
+Documentation:
+  ✓ README.md                    - Comprehensive guide (8.5 KB)
+  ✓ QUICK_START.md               - Quick reference (3.9 KB)
+  ✓ IMPLEMENTATION_SUMMARY.md    - This summary (8.8 KB)
+
+Project Updates:
+  ✓ package.json         - Added npm scripts for k6 tests
+
+═══════════════════════════════════════════════════════════════════════════════
+🎯 ALL REQUIREMENTS MET
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ Load Profiles
+   • Smoke:  1 VU (minimal validation)
+   • Load:   Ramp 1→50 VUs (steady state testing)
+   • Stress: Ramp to 250 VUs (breaking point)
+   • Spike:  10→200→10→300→10 VUs (sudden spikes)
+   • Soak:   30 VUs sustained for 2 hours
+
+✅ Authentication
+   • Bearer Token in Authorization header
+   • Configurable via AUTH_TOKEN environment variable
+   • Placeholder: [INSERT_BEARER_TOKEN]
+
+✅ Validation (check() calls)
+   • HTTP Status codes (200, 401, 429, 503)
+   • Response time thresholds (<500ms for normal load)
+   • Response body structure (message, data fields)
+   • Required fields (id, name, status, country, siteCode)
+   • Business logic (filter criteria matching)
+   • Content-Type headers
+
+✅ Custom Metrics
+   • locations_api_latency (Trend) - API-specific latency
+   • custom_business_errors (Rate) - Business validation failures
+   • errorCounter (Counter) - Total errors (stress/spike/soak)
+   • spikeRecoveryTime (Trend) - Recovery tracking (spike)
+   • memoryLeakIndicator (Trend) - Degradation detection (soak)
+
+✅ Thresholds
+   • p(95) response time targets set per test type
+   • Failure rate < 1% (normal), < 10-15% (stress/spike)
+   • Check pass rate > 99% (normal), > 80-85% (stress/spike)
+
+✅ Dynamic Data
+   • Uses __VU and __ITER for unique request generation
+   • 15 different metro locations rotated
+   • Active/Inactive status alternation
+   • Unique request IDs per request
+
+✅ Lifecycle Functions
+   • setup() - Pre-test initialization & baseline checks
+   • default() - Main test execution
+   • teardown() - Post-test summary & analysis
+   • Console logging throughout
+
+✅ Pacing
+   • sleep(1) between iterations
+   • Simulates realistic user think time
+   • Prevents API overwhelming
+
+═══════════════════════════════════════════════════════════════════════════════
+🚀 QUICK START
+═══════════════════════════════════════════════════════════════════════════════
+
+1. Prerequisites:
+   ┌──────────────────────────────────────────────────────────────────────┐
+   │ Install k6:                                                          │
+   │   macOS:    brew install k6                                          │
+   │   Linux:    sudo apt-get install k6                                  │
+   │   Windows:  choco install k6                                         │
+   │   Docker:   docker pull grafana/k6:latest                            │
+   └──────────────────────────────────────────────────────────────────────┘
+
+2. Configure Environment:
+   ┌──────────────────────────────────────────────────────────────────────┐
+   │ cd k6                                                                │
+   │ cp .env.example .env                                                 │
+   │ # Edit .env and set your AUTH_TOKEN                                  │
+   │ export BASE_URL="https://api.equinix.com"                            │
+   │ export AUTH_TOKEN="your-bearer-token-here"                           │
+   └──────────────────────────────────────────────────────────────────────┘
+
+3. Run Tests:
+   ┌──────────────────────────────────────────────────────────────────────┐
+   │ Using test runner:                                                   │
+   │   cd k6                                                              │
+   │   ./run-tests.sh smoke        # 1 minute smoke test                 │
+   │   ./run-tests.sh load         # 14 minute load test                 │
+   │   ./run-tests.sh all          # All except soak                     │
+   │                                                                      │
+   │ Using npm (from project root):                                       │
+   │   npm run k6:smoke            # Quick validation                    │
+   │   npm run k6:load             # Normal load                         │
+   │   npm run k6:stress           # Breaking point                      │
+   │   npm run k6:spike            # Spike testing                       │
+   │   npm run k6:soak             # 2-hour stability                    │
+   │   npm run k6:all              # All (except soak)                   │
+   │                                                                      │
+   │ Direct k6 commands:                                                  │
+   │   k6 run smoke.test.js                                               │
+   │   k6 run --out json=results.json load.test.js                        │
+   └──────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+📊 EXPECTED OUTPUT
+═══════════════════════════════════════════════════════════════════════════════
+
+Console Output Sample:
+┌──────────────────────────────────────────────────────────────────────────┐
+│ 🔧 Setting up Smoke Test for /v2/locations                              │
+│ ──────────────────────────────────────────────────────────────────────   │
+│                                                                          │
+│     ✓ checks.........................: 99.8%  ✓ 997  ✗ 2                │
+│     ✓ custom_business_errors.........: 0.1%   ✓ 1    ✗ 999              │
+│     ✓ http_req_duration..............: avg=245ms min=180ms p(95)=450ms  │
+│     ✓ http_req_failed................: 0.05%  ✓ 1    ✗ 1999             │
+│     ✓ locations_api_latency..........: avg=240ms p(95)=445ms p(99)=850ms│
+│                                                                          │
+│ 🏁 Smoke Test Completed                                                 │
+│ ──────────────────────────────────────────────────────────────────────   │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Results Files:
+  k6/results/smoke_test_20260119_005300.json
+  k6/results/load_test_20260119_010500.json
+  k6/results/stress_test_20260119_012000.json
+
+═══════════════════════════════════════════════════════════════════════════════
+📖 DOCUMENTATION
+═══════════════════════════════════════════════════════════════════════════════
+
+  📄 README.md                 - Full documentation & best practices
+  📄 QUICK_START.md            - Quick reference & commands
+  📄 IMPLEMENTATION_SUMMARY.md - This file
+  📄 .env.example              - Environment configuration template
+
+═══════════════════════════════════════════════════════════════════════════════
+🔗 CI/CD INTEGRATION
+═══════════════════════════════════════════════════════════════════════════════
+
+GitHub Actions Example:
+┌──────────────────────────────────────────────────────────────────────────┐
+│ - name: Run K6 Performance Tests                                        │
+│   run: |                                                                 │
+│     cd k6                                                                │
+│     ./run-tests.sh smoke                                                 │
+│   env:                                                                   │
+│     BASE_URL: ${{ secrets.API_URL }}                                     │
+│     AUTH_TOKEN: ${{ secrets.API_TOKEN }}                                 │
+└──────────────────────────────────────────────────────────────────────────┘
+
+Jenkins Pipeline:
+┌──────────────────────────────────────────────────────────────────────────┐
+│ stage('Performance Test') {                                             │
+│   steps {                                                                │
+│     sh 'cd k6 && ./run-tests.sh load'                                    │
+│   }                                                                      │
+│ }                                                                        │
+└──────────────────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════════════════════
+🎓 LEARNING RESOURCES
+═══════════════════════════════════════════════════════════════════════════════
+
+  🔗 k6 Official Docs:     https://k6.io/docs/
+  🔗 k6 Test Types:        https://k6.io/docs/test-types/
+  🔗 k6 Thresholds:        https://k6.io/docs/using-k6/thresholds/
+  🔗 k6 Metrics:           https://k6.io/docs/using-k6/metrics/
+  🔗 k6 Cloud (Optional):  https://k6.io/cloud/
+
+═══════════════════════════════════════════════════════════════════════════════
+✨ KEY FEATURES
+═══════════════════════════════════════════════════════════════════════════════
+
+  • Comprehensive test coverage (5 test types)
+  • Production-ready with all best practices
+  • Detailed validation and error tracking
+  • Custom metrics for business logic
+  • Performance thresholds per test type
+  • Dynamic data generation for realistic load
+  • Lifecycle hooks with logging
+  • Colored console output
+  • JSON result export
+  • CI/CD ready
+  • Extensive documentation
+  • Easy to customize and extend
+
+═══════════════════════════════════════════════════════════════════════════════
+🎉 SUCCESS!
+═══════════════════════════════════════════════════════════════════════════════
+
+All requirements have been successfully implemented. The k6 performance test
+suite is ready for immediate use!
+
+Next Steps:
+  1. Install k6 (see Quick Start above)
+  2. Configure your AUTH_TOKEN in .env
+  3. Run your first smoke test: npm run k6:smoke
+  4. Review the results and documentation
+  5. Integrate into your CI/CD pipeline
+
+Happy Testing! 🚀
+
+═══════════════════════════════════════════════════════════════════════════════

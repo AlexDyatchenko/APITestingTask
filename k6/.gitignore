@@ -1,0 +1,24 @@
+# K6 Test Results
+results/
+*.json
+!locations-schema.json
+
+# Environment files
+.env
+.env.local
+
+# K6 Cloud results
+k6-cloud-*
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
