@@ -30,8 +30,20 @@ export const CONTENT_TYPES = {
 
 export const LOCATION_STATUSES = {
   ACTIVE: "Active",
-  INACTIVE: "Inactive",
-  PENDING: "Pending",
+  EXTENDED: "Extended",
+  DEPLOYMENT: "Deployment",
+  NEW: "New",
+  RESTRICTED: "Restricted",
+  EXPIRED: "Expired",
+} as const;
+
+export const MVE_VENDORS = {
+  ARUBA: "Aruba",
+  CISCO: "Cisco",
+  FORTINET: "Fortinet",
+  VERSA: "Versa",
+  VMWARE: "VMWare",
+  PALO_ALTO: "Palo Alto",
 } as const;
 
 export const PERFORMANCE_THRESHOLDS = {

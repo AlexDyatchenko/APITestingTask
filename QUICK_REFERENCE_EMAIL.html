@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quick Reference Guide - /v2/locations API Test Suite</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 5px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+            border-bottom: 2px solid #ecf0f1;
+            padding-bottom: 5px;
+        }
+        h3 {
+            color: #555;
+            margin-top: 20px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #3498db;
+            overflow-x: auto;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+        }
+        ul, ol {
+            margin: 10px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 5px 0;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .emoji {
+            font-size: 1.2em;
+        }
+        .badge {
+            background-color: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.85em;
+            font-weight: bold;
+        }
+        .success {
+            background-color: #27ae60;
+        }
+        .warning {
+            background-color: #f39c12;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Quick Reference Guide - /v2/locations API Test Suite</h1>
+        <p><span class="badge success">ISTQB Compliant</span> <span class="badge">48+ Tests</span> <span class="badge">Updated Jan 2026</span></p>
+
+        <div class="section">
+            <h2>📂 Created Files</h2>
+            
+            <h3>Core Test Suite</h3>
+            <ul>
+                <li><strong>tests/api/v2.locations.spec.ts</strong> - Main test file with 48+ comprehensive tests following ISTQB standards</li>
+            </ul>
+
+            <h3>Modules</h3>
+            <ul>
+                <li><strong>modules/locations/locations.api.ts</strong> - Class-based API wrapper with methods for all endpoint interactions</li>
+                <li><strong>modules/locations/locations.types.ts</strong> - TypeScript type definitions for requests/responses</li>
+                <li><strong>modules/data/payload-builder.ts</strong> - Dynamic test data generator using Faker.js</li>
+            </ul>
+
+            <h3>Utilities</h3>
+            <ul>
+                <li><strong>utils/api-client.ts</strong> - Reusable API client with common HTTP methods and helper functions</li>
+                <li><strong>utils/constants.ts</strong> - Centralized constants (status codes, endpoints, thresholds)</li>
+            </ul>
+
+            <h3>Fixtures & Mocks</h3>
+            <ul>
+                <li><strong>fixtures/mocks/locations-schema.json</strong> - JSON Schema for AJV validation</li>
+                <li><strong>fixtures/mocks/locations.wiremock.ts</strong> - WireMock pattern implementation for API mocking</li>
+            </ul>
+
+            <h3>Documentation</h3>
+            <ul>
+                <li><strong>README_LOCATIONS_API.md</strong> - Comprehensive documentation with examples and usage</li>
+                <li><strong>ISTQB_TEST_COVERAGE.md</strong> - Complete ISTQB coverage report and metrics</li>
+                <li><strong>TEST_UPDATES_SUMMARY.md</strong> - Summary of all updates and migration guide</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>📊 Test Statistics</h2>
+            <p><strong>Total Tests:</strong> 48+ comprehensive test cases</p>
+            <p><strong>ISTQB Coverage:</strong> Full compliance with Foundation Level standards</p>
+
+            <h3>Test Categories:</h3>
+            <ol>
+                <li><strong>Authentication Scenarios</strong> (3 tests)
+                    <ul>
+                        <li>Valid Bearer token</li>
+                        <li>Missing token</li>
+                        <li>Invalid token</li>
+                    </ul>
+                </li>
+                <li><strong>Validation & Schema</strong> (3 tests)
+                    <ul>
+                        <li>JSON Schema validation with AJV</li>
+                        <li>Content-Type header validation</li>
+                        <li>Status code validation</li>
+                    </ul>
+                </li>
+                <li><strong>Functional Tests - Success Path</strong> (14 tests)
+                    <ul>
+                        <li>Retrieve locations with valid params</li>
+                        <li>Filter by status</li>
+                        <li>Filter by metro</li>
+                        <li>Filter by marketEnabled (true/false)</li>
+                        <li>Filter by mveVendor (Aruba, Cisco, etc.)</li>
+                        <li>Multiple locationStatus values</li>
+                        <li>Validate diversityZones object</li>
+                        <li>Validate MVE sizes and details</li>
+                        <li>Validate latitude/longitude ranges</li>
+                        <li>Multiple filter combinations</li>
+                    </ul>
+                </li>
+                <li><strong>Equivalence Partitioning - locationStatus</strong> (7 tests)
+                    <ul>
+                        <li>Active, Extended, Deployment, New, Restricted, Expired</li>
+                        <li>Invalid status value</li>
+                    </ul>
+                </li>
+                <li><strong>Equivalence Partitioning - mveVendor</strong> (7 tests)
+                    <ul>
+                        <li>Aruba, Cisco, Fortinet, Versa, VMWare, Palo Alto</li>
+                        <li>Invalid vendor value</li>
+                    </ul>
+                </li>
+                <li><strong>Equivalence Partitioning - marketEnabled</strong> (3 tests)
+                    <ul>
+                        <li>true, false, invalid value</li>
+                    </ul>
+                </li>
+                <li><strong>Boundary Testing</strong> (3 tests)
+                    <ul>
+                        <li>Minimum boundary values</li>
+                        <li>Maximum boundary values</li>
+                        <li>Empty parameters</li>
+                    </ul>
+                </li>
+                <li><strong>Error Handling</strong> (4 tests)
+                    <ul>
+                        <li>Invalid parameters (400)</li>
+                        <li>Invalid Accept header</li>
+                        <li>Non-existent endpoint (401/404)</li>
+                    </ul>
+                </li>
+                <li><strong>Performance Testing</strong> (2 tests)
+                    <ul>
+                        <li>Response time threshold (&lt;500ms)</li>
+                        <li>Concurrent requests (10 simultaneous)</li>
+                    </ul>
+                </li>
+                <li><strong>Dynamic Data Testing</strong> (2 tests)
+                    <ul>
+                        <li>Dynamically generated parameters</li>
+                        <li>Unique test data generation</li>
+                    </ul>
+                </li>
+                <li><strong>Legacy</strong> (1 test)
+                    <ul>
+                        <li>Original basic test maintained for compatibility</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="highlight">
+                <strong>ISTQB Techniques Applied:</strong>
+                <ul>
+                    <li>✅ Equivalence Partitioning</li>
+                    <li>✅ Boundary Value Analysis</li>
+                    <li>✅ Positive & Negative Testing</li>
+                    <li>✅ State Transition Testing</li>
+                    <li>✅ Schema Validation</li>
+                    <li>✅ Performance Testing</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>🏃 Quick Start</h2>
+            <pre><code># Install dependencies
+npm install
+
+# Run all tests
+npm run test:api
+
+# Run CI tests (29 critical tests)
+npm run test:api -- --grep "@ci"
+
+# Run ISTQB-specific tests
+npm run test:api -- --grep "@istqb"
+
+# Run specific test groups
+npm run test:api -- --grep "@auth"
+npm run test:api -- --grep "@performance"
+npm run test:api -- --grep "@schema"
+npm run test:api -- --grep "@equivalence"
+
+# Run just the locations tests
+npm run test:api tests/api/v2.locations.spec.ts
+
+# Generate HTML report
+npm run test:api -- --reporter=html
+npx playwright show-report
+
+# Run K6 performance tests
+npm run k6:smoke
+npm run k6:load</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>🏷️ Available Test Tags</h2>
+            <pre><code>@ci              # CI/CD pipeline tests (29 tests)
+@api             # API tests
+@auth            # Authentication tests
+@schema          # Schema validation
+@performance     # Performance tests
+@negative        # Negative scenarios
+@boundary        # Boundary testing
+@functional      # Functional tests
+@smoke           # Critical smoke tests
+@dynamic         # Dynamic data tests
+@legacy          # Legacy tests
+@load            # Load tests
+@istqb           # ISTQB-specific tests
+@equivalence     # Equivalence partitioning tests
+@headers         # Header validation tests</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>💡 Code Examples</h2>
+
+            <h3>Using LocationsAPI</h3>
+            <pre><code>const locationsAPI = new LocationsAPI(request, baseURL);
+const response = await locationsAPI.getLocations(
+  {
+    locationStatus: "Active",  // Updated parameter name
+    metro: "Singapore",
+    marketEnabled: true,       // New parameter
+    mveVendor: "Aruba",        // New parameter
+  },
+  "bearer-token",
+);</code></pre>
+
+            <h3>Using PayloadBuilder</h3>
+            <pre><code>const params = PayloadBuilder.generateValidLocationParams();
+const token = PayloadBuilder.generateValidToken();</code></pre>
+
+            <h3>Using APIClient</h3>
+            <pre><code>const apiClient = new APIClient(request, baseURL);
+const response = await apiClient.get("/v2/locations", {
+  params: { metro: "Singapore" },
+  authToken: "bearer-token",
+});</code></pre>
+
+            <h3>Schema Validation</h3>
+            <pre><code>const ajv = new Ajv();
+addFormats(ajv);
+const validateSchema = ajv.compile(locationsSchema);
+const isValid = validateSchema(responseBody);</code></pre>
+
+            <h3>WireMock Pattern</h3>
+            <pre><code>await LocationsMockServer.stubGetLocationsSuccess(page);
+await LocationsMockServer.stubGetLocationsUnauthorized(page);</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>📁 Complete File Structure</h2>
+            <pre><code>APITestingTask/
+├── tests/
+│   └── api/
+│       ├── v2.locations.spec.ts          ✅ 48+ tests (ISTQB)
+│       └── v2.locations.response.json    ✅ Sample response
+├── modules/
+│   ├── locations/
+│   │   ├── locations.api.ts              ✅ API wrapper
+│   │   └── locations.types.ts            ✅ Updated types
+│   └── data/
+│       └── payload-builder.ts            ✅ Test data generator
+├── utils/
+│   ├── api-client.ts                     ✅ API client
+│   └── constants.ts                      ✅ Updated constants
+├── fixtures/
+│   └── mocks/
+│       ├── locations-schema.json         ✅ JSON Schema
+│       └── locations.wiremock.ts         ✅ WireMock mocks
+├── k6/
+│   ├── smoke.test.js                     ✅ K6 smoke tests
+│   ├── load.test.js                      ✅ K6 load tests
+│   └── run-tests.sh                      ✅ Test runner
+├── README_LOCATIONS_API.md               ✅ Documentation
+├── ISTQB_TEST_COVERAGE.md                ✅ Coverage report
+├── TEST_UPDATES_SUMMARY.md               ✅ Update summary
+├── QUICK_REFERENCE.md                    ✅ Quick reference
+├── QUICK_REFERENCE_EMAIL.html            ✅ This file
+├── package.json                          ✅ Updated
+└── playwright.config.ts                  ✅ Configured</code></pre>
+        </div>
+
+        <div class="section">
+            <h2>✅ Implementation Checklist</h2>
+            <ul>
+                <li>✅ Modular architecture with class-based API wrapper</li>
+                <li>✅ TypeScript type definitions (updated)</li>
+                <li>✅ Authentication scenarios (valid/invalid tokens)</li>
+                <li>✅ AJV JSON Schema validation</li>
+                <li>✅ Header validation (Content-Type)</li>
+                <li>✅ Status code assertions</li>
+                <li>✅ Success path tests (14 tests)</li>
+                <li>✅ Boundary testing (min/max/empty values)</li>
+                <li>✅ Error handling (400, 401, 404, 406)</li>
+                <li>✅ Performance testing (&lt;500ms threshold)</li>
+                <li>✅ Concurrent request testing (10 requests)</li>
+                <li>✅ WireMock pattern for mocking</li>
+                <li>✅ Dynamic data generation with Faker.js</li>
+                <li>✅ Comprehensive documentation</li>
+                <li>✅ Test tags for filtering (@ci, @istqb, etc.)</li>
+                <li>✅ Organized with describe blocks</li>
+                <li>✅ <strong>ISTQB Equivalence Partitioning (17 tests)</strong></li>
+                <li>✅ <strong>All locationStatus values tested (6 valid + 1 invalid)</strong></li>
+                <li>✅ <strong>All mveVendor values tested (6 valid + 1 invalid)</strong></li>
+                <li>✅ <strong>marketEnabled parameter tested (true/false/invalid)</strong></li>
+                <li>✅ <strong>Response structure validation (diversityZones, MVE sizes)</strong></li>
+                <li>✅ <strong>Latitude/longitude range validation (-90 to 90, -180 to 180)</strong></li>
+                <li>✅ <strong>K6 load testing integration</strong></li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>🔧 API Parameters</h2>
+            <table>
+                <tr>
+                    <th>Parameter</th>
+                    <th>Type</th>
+                    <th>Values</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td><code>locationStatus</code></td>
+                    <td>string/array</td>
+                    <td>Active, Extended, Deployment, New, Restricted, Expired</td>
+                    <td>Filter by location status</td>
+                </tr>
+                <tr>
+                    <td><code>metro</code></td>
+                    <td>string</td>
+                    <td>Any metro name</td>
+                    <td>Filter by metro location</td>
+                </tr>
+                <tr>
+                    <td><code>marketEnabled</code></td>
+                    <td>boolean</td>
+                    <td>true, false (default)</td>
+                    <td>Return only enabled markets</td>
+                </tr>
+                <tr>
+                    <td><code>mveVendor</code></td>
+                    <td>string</td>
+                    <td>Aruba, Cisco, Fortinet, Versa, VMWare, Palo Alto</td>
+                    <td>Filter by MVE vendor</td>
+                </tr>
+            </table>
+
+            <h3>🔧 Configuration Required</h3>
+            <ol>
+                <li><strong>Set BASE_URL</strong> in playwright.config.ts or .env</li>
+                <li><strong>Configure authentication</strong> if API requires tokens</li>
+                <li><strong>Adjust performance thresholds</strong> in utils/constants.ts if needed</li>
+                <li><strong>Update schema</strong> in fixtures/mocks/locations-schema.json to match actual API</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>🎯 Next Steps</h2>
+            <ol>
+                <li>Configure your API base URL</li>
+                <li>Update authentication logic if needed</li>
+                <li>Run tests: <code>npx playwright test</code></li>
+                <li>Review HTML report: <code>npx playwright show-report</code></li>
+                <li>Add more test cases as needed</li>
+                <li>Integrate with CI/CD pipeline</li>
+            </ol>
+        </div>
+
+        <div class="section">
+            <h2>📞 Support & Documentation</h2>
+            <ul>
+                <li><strong>README_LOCATIONS_API.md</strong> - Comprehensive API documentation</li>
+                <li><strong>ISTQB_TEST_COVERAGE.md</strong> - Complete ISTQB coverage report with metrics</li>
+                <li><strong>TEST_UPDATES_SUMMARY.md</strong> - Summary of updates and migration guide</li>
+                <li><strong>QUICK_REFERENCE.md</strong> - Quick reference guide (Markdown)</li>
+            </ul>
+            
+            <div class="highlight">
+                <strong>⚠️ Breaking Changes:</strong>
+                <p>Parameter name changed from <code>locationStatuses</code> to <code>locationStatus</code></p>
+                <p>Status values updated to: Active, Extended, Deployment, New, Restricted, Expired</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; padding-top: 20px; border-top: 2px solid #ecf0f1; text-align: center; color: #7f8c8d; font-size: 0.9em;">
+            <p>Quick Reference Guide - /v2/locations API Test Suite</p>
+            <p>Generated on January 19, 2026</p>
+        </div>
+    </div>
+</body>
+</html>

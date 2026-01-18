@@ -3,13 +3,25 @@
  */
 
 export interface LocationsQueryParams {
-  locationStatuses?: string | string[];
+  locationStatus?: string | string[];
   metro?: string;
-  country?: string;
-  limit?: number;
-  offset?: number;
-  search?: string;
-  [key: string]: string | string[] | number | undefined;
+  marketEnabled?: boolean;
+  mveVendor?: string;
+  [key: string]: string | string[] | number | boolean | undefined;
+}
+
+export interface DiversityZone {
+  id: string;
+  name: string;
+  supportedPortSpeeds: number[];
+}
+
+export interface MveSize {
+  id: string;
+  label: string;
+  cpuCoreCount: number;
+  ramGb: number;
+  bandwidthMbps: number;
 }
 
 export interface Location {
@@ -17,11 +29,24 @@ export interface Location {
   name: string;
   metro?: string;
   country?: string;
+  city?: string;
   status: string;
-  address?: string;
-  coordinates?: {
-    latitude: number;
-    longitude: number;
+  siteCode?: string;
+  networkRegion?: string;
+  address?: {
+    street?: string;
+    city?: string;
+    state?: string;
+    postcode?: string;
+    country?: string;
+  };
+  latitude?: number;
+  longitude?: number;
+  diversityZones?: DiversityZone[];
+  products?: string[];
+  mve?: {
+    sizes?: string[];
+    details?: MveSize[];
   };
   createdAt?: string;
   updatedAt?: string;

@@ -14,16 +14,24 @@ export class PayloadBuilder {
     overrides?: Partial<LocationsQueryParams>,
   ): LocationsQueryParams {
     return {
-      locationStatuses: faker.helpers.arrayElement([
+      locationStatus: faker.helpers.arrayElement([
         "Active",
-        "Inactive",
-        "Pending",
+        "Extended",
+        "Deployment",
+        "New",
+        "Restricted",
+        "Expired",
       ]),
       metro: faker.location.city(),
-      country: faker.location.country(),
-      limit: faker.number.int({ min: 1, max: 100 }),
-      offset: faker.number.int({ min: 0, max: 1000 }),
-      search: faker.word.sample(),
+      marketEnabled: faker.datatype.boolean(),
+      mveVendor: faker.helpers.arrayElement([
+        "Aruba",
+        "Cisco",
+        "Fortinet",
+        "Versa",
+        "VMWare",
+        "Palo Alto",
+      ]),
       ...overrides,
     };
   }
@@ -33,10 +41,8 @@ export class PayloadBuilder {
    */
   static generateValidLocationParams(): LocationsQueryParams {
     return {
-      locationStatuses: "Active",
+      locationStatus: "Active",
       metro: "Singapore",
-      limit: 10,
-      offset: 0,
     };
   }
 
@@ -45,10 +51,8 @@ export class PayloadBuilder {
    */
   static generateMinBoundaryParams(): LocationsQueryParams {
     return {
-      locationStatuses: "Active",
-      limit: 1,
-      offset: 0,
-      search: "a", // Minimum search length
+      locationStatus: "Active",
+      marketEnabled: false,
     };
   }
 
@@ -57,10 +61,9 @@ export class PayloadBuilder {
    */
   static generateMaxBoundaryParams(): LocationsQueryParams {
     return {
-      locationStatuses: "Active",
-      limit: 1000,
-      offset: 999999,
-      search: "a".repeat(500), // Maximum search length
+      locationStatus: "Active",
+      metro: "A".repeat(100),
+      marketEnabled: true,
     };
   }
 
@@ -69,10 +72,10 @@ export class PayloadBuilder {
    */
   static generateInvalidParams(): Record<string, any> {
     return {
-      locationStatuses: faker.number.int(), // Invalid type
-      metro: null,
-      limit: -1, // Invalid negative number
-      offset: "invalid", // Invalid type
+      locationStatus: faker.number.int(), // Invalid type
+      metro: 12345, // Invalid type (should be string)
+      marketEnabled: "invalid", // Invalid type (should be boolean)
+      mveVendor: "InvalidVendor123", // Invalid vendor name
     };
   }
 
