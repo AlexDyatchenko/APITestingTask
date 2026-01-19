@@ -1,6 +1,6 @@
 # API Testing Project Setup Guide
 
-This project contains comprehensive API tests for the `/v2/locations` endpoint using Playwright Test framework with TypeScript.
+This project contains comprehensive API tests for the `/v2/locations` endpoint using Playwright Test framework with TypeScript, plus k6 performance testing with Grafana visualization.
 
 ## Prerequisites
 
@@ -8,7 +8,27 @@ Before you begin, ensure you have the following installed:
 
 - **Node.js** (v18 or higher) - [Download here](https://nodejs.org/)
 - **npm** (comes with Node.js) or **yarn**
+- **Docker & Docker Compose** - For Grafana/InfluxDB setup
+- **k6** - [Download here](https://k6.io/docs/get-started/installation/)
 - A code editor like **VS Code**
+
+## 📊 Performance Testing with Grafana
+
+This project includes a complete k6 + Grafana + InfluxDB stack for load testing visualization.
+
+### Quick Start
+
+```bash
+# Start Grafana and InfluxDB
+docker-compose up -d
+
+# Run k6 test with Grafana visualization
+k6 run --out influxdb=http://localhost:8086/k6 k6/smoke.test1.js
+
+# View results at http://localhost:3000 (admin/admin)
+```
+
+For detailed setup instructions, see [GRAFANA_SETUP.md](GRAFANA_SETUP.md)
 
 ## Quick Start
 

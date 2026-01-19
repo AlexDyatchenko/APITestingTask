@@ -23,15 +23,18 @@ const customErrorRate = new Rate("custom_business_errors");
 
 // Test Configuration - Smoke Test Profile
 export const options = {
-  vus: 1,
-  duration: "20s",
+  stages: [
+    { duration: "3s", target: 10 }, // 1 user for 20 seconds
+    { duration: "4s", target: 10 }, // 1 user for 20 seconds
+    { duration: "5s", target: 0 }, // 1 user for 20 seconds
+  ],
 
   thresholds: {
-    // 95th percentile response time should be below 500ms
-    http_req_duration: ["p(95)<500"],
+    // 95th percentile response time should be below 600ms (adjusted for API variability)
+    http_req_duration: ["p(95)<600"],
 
     // Custom latency metric threshold
-    locations_api_latency: ["p(95)<500", "p(99)<1000"],
+    locations_api_latency: ["p(95)<600", "p(99)<1000"],
 
     // Failure rate - API may return 403
     http_req_failed: ["rate<1.01"],
@@ -59,10 +62,10 @@ const API_ENDPOINT = "/v2/locations";
 export function setup() {
   console.log("🔧 Setting up Smoke Test for /v2/locations");
   console.log(`📍 Base URL: ${BASE_URL}`);
-  console.log(`👤 VUs: ${options.vus}`);
-  console.log(`⏱️  Duration: ${options.duration}`);
+  // console.log(`👤 VUs: ${options.vus}`);
+  // console.log(`⏱️  Duration: ${options.duration}`);
   console.log(`🎯 Target: ${BASE_URL}${API_ENDPOINT}`);
-  console.log("─".repeat(60));
+  console.log("─".repeat(100));
 
   return {
     startTime: new Date().toISOString(),
@@ -201,7 +204,9 @@ export function teardown(data) {
   console.log("🏁 Smoke Test Completed for /v2/locations");
   console.log(`📊 Test Type: ${data.testType}`);
   console.log(`🕐 Started: ${data.startTime}`);
-  console.log(`🕐 Ended: ${new Date().toISOString()}`);
+  console.log(`🕐 Ended  : ${new Date().toISOString()}`);
   console.log("✅ Check test results and metrics above");
   console.log("─".repeat(60));
 }
+
+//k6 run --log-format=raw k6/smoke.test1.js

@@ -143,3 +143,12 @@ vite.config.ts.timestamp-*
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# Docker volumes and data
+.docker/
+grafana-data/
+influxdb-data/
+
+# k6 test results
+k6/results/*.json
+k6/results/*.html

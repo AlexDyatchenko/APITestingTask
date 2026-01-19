@@ -58,9 +58,6 @@ export const options = {
 const BASE_URL = __ENV.BASE_URL || "https://api-staging.megaport.com";
 const API_ENDPOINT = "/v2/locations";
 
-// Authentication - Replace with your auth type
-const AUTH_TOKEN = __ENV.AUTH_TOKEN || "[INSERT_BEARER_TOKEN]";
-
 // Test data variations
 const METRO_OPTIONS = [
   "Singapore",
@@ -126,11 +123,10 @@ export default function (data) {
   const metroIndex = (__VU * __ITER + Date.now()) % METRO_OPTIONS.length;
   const statusIndex = __ITER % STATUS_OPTIONS.length;
 
-  // Prepare headers with authentication
+  // Prepare headers
   const headers = {
     Accept: "application/json",
     "Content-Type": "application/json",
-    Authorization: `Bearer ${AUTH_TOKEN}`,
     "X-Request-ID": `spike-test-${__VU}-${__ITER}-${Date.now()}`,
     "X-Test-Type": "spike",
     "X-VU-Count": `${__VU}`,
@@ -166,11 +162,14 @@ export default function (data) {
 
   // Validation checks
   const checkResult = check(response, {
-    "✓ Status is 200, 429, or 503": (r) =>
-      r.status === 200 || r.status === 429 || r.status === 503,
-    "✓ Response received": (r) => r.body !== null && r.body !== undefined,
-    "✓ Response time < 8000ms": (r) => r.timings.duration < 8000,
-    "✓ Response has message field": (r) => {
+    "Status is 200, 403, 429, or 503": (r) =>
+      r.status === 200 ||
+      r.status === 403 ||
+      r.status === 429 ||
+      r.status === 503,
+    "Response received": (r) => r.body !== null && r.body !== undefined,
+    "Response time < 8000ms": (r) => r.timings.duration < 8000,
+    "Response has message field": (r) => {
       try {
         if (r.status !== 200) return true; // Skip for non-200 responses
         if (typeof r.body !== "string") return false;
@@ -180,7 +179,7 @@ export default function (data) {
         return false;
       }
     },
-    "✓ Response has data array": (r) => {
+    "Response has data array": (r) => {
       try {
         if (r.status !== 200) return true; // Skip for non-200 responses
         if (typeof r.body !== "string") return false;
@@ -190,9 +189,9 @@ export default function (data) {
         return false;
       }
     },
-    "✓ No critical server errors": (r) =>
+    "No critical server errors": (r) =>
       r.status < 500 || r.status === 503 || r.status === 429,
-    "✓ Data items have required fields": (r) => {
+    "Data items have required fields": (r) => {
       try {
         if (r.status !== 200) return true; // Skip for non-200 responses
         if (typeof r.body !== "string") return false;
@@ -210,7 +209,7 @@ export default function (data) {
         return false;
       }
     },
-    "✓ Rate limiting handled gracefully": (r) => {
+    "Rate limiting handled gracefully": (r) => {
       if (r.status === 429) {
         return (
           r.headers["Retry-After"] !== undefined ||

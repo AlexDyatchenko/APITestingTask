@@ -17,6 +17,7 @@
     "test:api:ui": "npx playwright test --ui",
     "k6:smoke": "cd k6 && ./run-tests.sh smoke",
     "k6:load": "cd k6 && ./run-tests.sh load",
+    "k6:load:grafana": "k6 run --out influxdb=http://localhost:8086/k6",
     "k6:stress": "cd k6 && ./run-tests.sh stress",
     "k6:spike": "cd k6 && ./run-tests.sh spike",
     "k6:soak": "cd k6 && ./run-tests.sh soak",
