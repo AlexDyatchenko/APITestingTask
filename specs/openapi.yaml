@@ -1,0 +1,19 @@
+openapi: 3.0.3
+info:
+  title: Megaport API
+  version: 1.0.0
+  description: API documentation for Megaport services
+servers:
+  - url: https://dev.megaport.com
+    description: Development server
+paths:
+  /v2/locations:
+    $ref: './paths/locations.yaml'
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

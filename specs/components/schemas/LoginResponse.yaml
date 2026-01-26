@@ -1,0 +1,242 @@
+type: object
+description: Successful login response with user information and OAuth token
+properties:
+  message:
+    type: string
+    example: "Login successfully"
+  terms:
+    type: string
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+  data:
+    type: object
+    properties:
+      permissions:
+        type: object
+        description: User permissions mapped by company UID
+        additionalProperties:
+          type: array
+          items:
+            type: string
+        example:
+          "bec27ded-29fb-43dd-8df8-894eb5ca1e98": ["end_user"]
+      sourceIp:
+        type: string
+        format: ipv4
+        description: Source IP address of the login request
+        example: "192.168.1.1"
+      username:
+        type: string
+        format: email
+        example: "megaport.newuser@abcd.com"
+      firstName:
+        type: string
+        example: "John"
+      lastName:
+        type: string
+        example: "Doe"
+      companyName:
+        type: string
+        example: "Public Access"
+      loginDate:
+        type: integer
+        format: int64
+        description: Login timestamp in milliseconds
+        example: 1644820229860
+      locale:
+        type: string
+        description: User's locale/region
+        example: "United Kingdom"
+      language:
+        type: string
+        example: "English"
+      userAgent:
+        type: string
+        description: User agent string from the login request
+        example: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)"
+      personId:
+        type: integer
+        description: Internal person/employee ID
+        example: 47501
+      personUid:
+        type: string
+        format: uuid
+        description: Person UUID
+        example: "379473d7-ebc8-455e-bffa-370f9378240c"
+      companyId:
+        type: integer
+        description: Company ID
+        example: 1269
+      companyUid:
+        type: string
+        format: uuid
+        description: Company UUID
+        example: "bec27ded-29fb-43dd-8df8-894eb5ca1e98"
+      channelPartner:
+        type: boolean
+        example: false
+      supportOverride:
+        type: boolean
+        example: false
+      supportOverrideId:
+        type: string
+        example: ""
+      featureFlags:
+        type: array
+        description: Feature flags enabled for the user
+        items:
+          type: string
+        example:
+          [
+            "pv_manual_mvp",
+            "distributor_support",
+            "vxc_20g",
+            "term_mcr",
+            "partner_portal",
+            "validation",
+          ]
+      email:
+        type: string
+        format: email
+        example: "megaport.newuser@abcd.com"
+      apiKey:
+        type: boolean
+        description: Indicates if the authentication is via API key
+        example: false
+      authorities:
+        type: object
+        description: User authorities/roles mapped by company UID
+        additionalProperties:
+          type: object
+          additionalProperties:
+            type: boolean
+        example:
+          "bec27ded-29fb-43dd-8df8-894eb5ca1e98":
+            "end_user": true
+      fullName:
+        type: string
+        example: "John Doe"
+      companyType:
+        type: string
+        enum: [DEFAULT, PARTNER, RESELLER]
+        example: "DEFAULT"
+      parentCompanyUid:
+        type: string
+        example: ""
+      nearestCountry:
+        type: string
+        example: ""
+      requireTotp:
+        type: boolean
+        description: Whether TOTP (MFA) is required
+        example: false
+      accountManager:
+        type: object
+        description: Account manager details
+        properties:
+          firstName:
+            type: string
+            example: "Luke"
+          lastName:
+            type: string
+            example: "Richardson"
+          email:
+            type: string
+            format: email
+            example: "luke.richardson@megaport.com"
+          active:
+            type: boolean
+            example: true
+          uid:
+            type: string
+            format: uuid
+            example: "1a9cdeaf-549b-4d8a-9f5d-9819f92c4e45"
+          featureFlags:
+            type: array
+            items:
+              type: string
+            example: []
+          newsletter:
+            type: boolean
+            example: true
+          promotions:
+            type: boolean
+            example: true
+          name:
+            type: string
+            example: "Luke Richardson"
+      forcePassword:
+        type: boolean
+        description: Whether password change is forced
+        example: false
+      rootAccountType:
+        type: string
+        enum: [ADMIN, USER]
+        example: "ADMIN"
+      accountType:
+        type: string
+        enum: [ADMIN, USER]
+        example: "ADMIN"
+      region:
+        type: string
+        example: ""
+      phone:
+        type: string
+        example: ""
+      expiryDate:
+        type: string
+        example: ""
+      companyConfiguration:
+        type: object
+        description: Company-level configuration settings
+        properties:
+          consolidatedSettings:
+            type: array
+            items:
+              type: object
+              properties:
+                key:
+                  type: string
+                  example: "NOTIFICATIONS_ENABLED"
+                value:
+                  oneOf:
+                    - type: boolean
+                    - type: string
+                  example: true
+      oAuthToken:
+        type: object
+        description: OAuth authentication tokens
+        properties:
+          idToken:
+            type: string
+            description: JWT ID token
+            example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9..."
+          accessToken:
+            type: string
+            description: JWT access token
+            example: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9..."
+          expiresIn:
+            type: integer
+            description: Token expiration time in seconds
+            example: 1000
+          tokenType:
+            type: string
+            example: "Bearer"
+      idpId:
+        type: string
+        format: uuid
+        description: Identity provider ID
+        example: "ec81f4d2-5902-4dba-9df6-ad212a1b2295"
+      t:
+        type: integer
+        example: 1
+      name:
+        type: string
+        example: "John Doe"
+      new:
+        type: boolean
+        description: Whether this is a new user
+        example: false
+required:
+  - message
+  - terms
+  - data

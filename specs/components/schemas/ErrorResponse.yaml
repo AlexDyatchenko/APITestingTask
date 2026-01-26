@@ -1,0 +1,28 @@
+type: object
+description: Error response structure for API errors
+properties:
+  message:
+    type: string
+    description: Error message describing what went wrong
+    example: "Bad request - Invalid parameters"
+  terms:
+    type: string
+    description: Acceptable Use Policy terms
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+  data:
+    type: object
+    description: Additional error details (optional)
+    nullable: true
+    additionalProperties: true
+  # Legacy fields (for backward compatibility)
+  error:
+    type: string
+    description: Error type (deprecated, use message instead)
+    deprecated: true
+  statusCode:
+    type: integer
+    description: HTTP status code (deprecated, use HTTP response status instead)
+    deprecated: true
+required:
+  - message
+  - terms

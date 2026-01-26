@@ -1,0 +1,14 @@
+type: object
+description: Response for MFA operations (reset, disable, admin reset)
+properties:
+  message:
+    type: string
+    description: Response message indicating the result of the MFA operation
+    example: "Your MFA has been reset successfully"
+  terms:
+    type: string
+    description: Acceptable Use Policy terms
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+required:
+  - message
+  - terms

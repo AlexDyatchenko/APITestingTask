@@ -1,0 +1,178 @@
+openapi: 3.0.3
+info:
+  title: Megaport API
+  description: 'Megaport offers a public API for access to all the services available
+    through
+
+    the Megaport Portal. You can use this API to automate your Megaport provisioning
+
+    to save time and effort.
+
+
+    The Megaport API is based on REST. The API has predictable URLs, accepts
+
+    form-encoded request bodies, returns JSON-encoded responses, and uses standard
+    HTTP
+
+    response codes.
+
+
+    ## Environments
+
+    There are two server environments that can be accessed using different URLs:
+
+    - **Production**: https://api.megaport.com - Live environment where you will be
+    liable for any services ordered
+
+    - **Staging**: https://api-staging.megaport.com - Test environment reset every
+    24 hours, no billing
+
+
+    For more information, visit: https://docs.megaport.com/
+
+    '
+  version: 3.0.0
+  contact:
+    name: Megaport Tech Pubs
+    email: techpubs@megaport.com
+  termsOfService: https://www.megaport.com/legal/acceptable-use-policy
+  x-logo:
+    url: https://www.megaport.com/wp-content/uploads/Megaport-Logo.svg
+servers:
+- url: https://api.megaport.com
+  description: Production environment - Live services (billable)
+- url: https://api-staging.megaport.com
+  description: Staging environment - Test services (reset every 24 hours)
+tags:
+- name: Authentication
+  description: Authentication related operations
+- name: IX
+  description: IX related operations
+- name: MFA
+  description: MFA related operations
+- name: Markets
+  description: Markets related operations
+- name: Partners
+  description: Partners related operations
+- name: Ports
+  description: Ports related operations
+- name: SAP
+  description: SAP related operations
+- name: Users
+  description: Users related operations
+- name: VXCs
+  description: VXCs related operations
+security:
+- BearerAuth: []
+paths:
+  $paths/v2-dropdowns-partner-megaports.yaml:
+    $ref: ./paths/v2-dropdowns-partner-megaports.yaml
+  $paths/v2-employee-employeeId-mfa.yaml:
+    $ref: ./paths/v2-employee-employeeId-mfa.yaml
+  $paths/v2-employee-employeeId.yaml:
+    $ref: ./paths/v2-employee-employeeId.yaml
+  $paths/v2-market.yaml:
+    $ref: ./paths/v2-market.yaml
+  $paths/v2-password-change.yaml:
+    $ref: ./paths/v2-password-change.yaml
+  $paths/v2-product-ix-types.yaml:
+    $ref: ./paths/v2-product-ix-types.yaml
+  $paths/v2-secure-awshc.yaml:
+    $ref: ./paths/v2-secure-awshc.yaml
+  $paths/v2-service-key.yaml:
+    $ref: ./paths/v2-service-key.yaml
+  $paths/v3-login.yaml:
+    $ref: ./paths/v3-login.yaml
+  $paths/v3-networkdesign-buy.yaml:
+    $ref: ./paths/v3-networkdesign-buy.yaml
+  $paths/v3-networkdesign-validate.yaml:
+    $ref: ./paths/v3-networkdesign-validate.yaml
+  $paths/v3-product-vxc-productUid.yaml:
+    $ref: ./paths/v3-product-vxc-productUid.yaml
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: 'JWT token obtained from the /v3/login endpoint.
+
+        Include in the Authorization header as: `Bearer <token>`
+
+        '
+  schemas:
+    StandardResponse:
+      $ref: ./components/schemas/StandardResponse.yaml
+    ErrorResponse:
+      $ref: ./components/schemas/ErrorResponse.yaml
+    LoginRequest:
+      $ref: ./components/schemas/LoginRequest.yaml
+    LoginResponse:
+      $ref: ./components/schemas/LoginResponse.yaml
+    Employment:
+      $ref: ./components/schemas/Employment.yaml
+    EmploymentListResponse:
+      $ref: ./components/schemas/EmploymentListResponse.yaml
+    MFAResetRequest:
+      $ref: ./components/schemas/MFAResetRequest.yaml
+    MFAResponse:
+      $ref: ./components/schemas/MFAResponse.yaml
+    TOTPQRCodeResponse:
+      $ref: ./components/schemas/TOTPQRCodeResponse.yaml
+    ChangePasswordRequest:
+      $ref: ./components/schemas/ChangePasswordRequest.yaml
+  responses:
+    Unauthorized:
+      description: Unauthorized - Missing or invalid authentication credentials
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Unauthorized
+            terms: This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy
+    Forbidden:
+      description: Forbidden - Insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Forbidden - You do not have the required permissions
+            terms: This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy
+    BadRequest:
+      description: Bad request - Missing or incorrect request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Bad request - Invalid parameters
+            terms: This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy
+    ServerError:
+      description: Server error - Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Internal server error
+            terms: This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy
+    ServiceUnavailable:
+      description: Service unavailable - Server is down or under maintenance
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          example:
+            message: Service unavailable
+            terms: This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy
+  parameters:
+    EmployeeId:
+      name: employeeId
+      in: path
+      required: true
+      description: The employee ID of the user
+      schema:
+        type: integer
+        example: 45115

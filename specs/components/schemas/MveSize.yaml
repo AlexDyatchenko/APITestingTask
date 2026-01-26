@@ -1,0 +1,18 @@
+type: object
+properties:
+  id:
+    type: string
+  label:
+    type: string
+  cpuCoreCount:
+    type: number
+  ramGb:
+    type: number
+  bandwidthMbps:
+    type: number
+required:
+  - id
+  - label
+  - cpuCoreCount
+  - ramGb
+  - bandwidthMbps

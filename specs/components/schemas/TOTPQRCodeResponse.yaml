@@ -1,0 +1,32 @@
+type: object
+description: Response containing TOTP QR code data for MFA setup
+properties:
+  message:
+    type: string
+    example: "QR Code generated successfully"
+  terms:
+    type: string
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+  data:
+    type: object
+    properties:
+      totpSecret:
+        type: string
+        description: |
+          The TOTP secret key (16 characters, capital letters and digits only).
+          Used for generating time-based one-time passwords.
+        pattern: "^[A-Z0-9]{16}$"
+        example: "G4C3S6MBH2HSF2EV"
+      qrCodeUrl:
+        type: string
+        format: uri
+        description: URL or base64 encoded QR code image for scanning with authenticator apps
+        example: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAA..."
+      otpAuthUrl:
+        type: string
+        description: OTP Auth URL that can be used to manually configure authenticator apps
+        example: "otpauth://totp/Megaport:user@example.com?secret=G4C3S6MBH2HSF2EV&issuer=Megaport"
+required:
+  - message
+  - terms
+  - data

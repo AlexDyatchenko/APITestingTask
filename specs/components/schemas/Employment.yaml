@@ -1,0 +1,174 @@
+type: object
+description: User employment information
+properties:
+  emails:
+    type: array
+    items:
+      type: object
+      properties:
+        emailAddressId:
+          type: integer
+          example: 47162
+        email:
+          type: string
+          format: email
+          example: "kate.peters@example.com"
+        primary:
+          type: boolean
+          example: true
+        badEmail:
+          type: boolean
+          example: false
+        badEmailType:
+          type: string
+          nullable: true
+          example: null
+        badEmailReason:
+          type: string
+          nullable: true
+          example: null
+  companyId:
+    type: integer
+    description: Company ID
+    example: 1153
+  email:
+    type: string
+    format: email
+    description: Primary email address
+    example: "kate.peters@example.com"
+  employmentId:
+    type: integer
+    description: Employment ID
+    example: 51193
+  firstName:
+    type: string
+    example: "Kate"
+  lastName:
+    type: string
+    example: "Peters"
+  mobile:
+    type: string
+    nullable: true
+    example: null
+  personId:
+    type: integer
+    description: Person ID
+    example: 57278
+  personUid:
+    type: string
+    format: uuid
+    description: Person UUID
+    example: "cec8e72a-5491-47bf-af2e-0a241e14c679"
+  personAltId:
+    type: string
+    nullable: true
+    example: null
+  phone:
+    type: string
+    nullable: true
+    example: "+611231234"
+  position:
+    type: string
+    description: User's position/role
+    example: "Company Admin"
+  positionId:
+    type: integer
+    example: 1983
+  username:
+    type: string
+    format: email
+    example: "kate.peters@example.com"
+  password:
+    type: string
+    nullable: true
+    example: null
+  billingContact:
+    type: boolean
+    description: Whether user is a billing contact
+    example: true
+  technicalContact:
+    type: boolean
+    description: Whether user is a technical contact
+    example: true
+  notificationEnabled:
+    type: boolean
+    description: Whether notifications are enabled
+    example: true
+  employmentType:
+    type: string
+    enum: [REAL, VIRTUAL]
+    example: "REAL"
+  active:
+    type: boolean
+    description: Whether the user is active
+    example: true
+  requireTotp:
+    type: boolean
+    description: Whether TOTP/MFA is required
+    example: false
+  securityRoles:
+    type: array
+    description: Security roles assigned to the user
+    items:
+      type: string
+    example: ["companyAdmin"]
+  permissions:
+    type: array
+    description: Permissions granted to the user
+    items:
+      type: string
+    example:
+      - "financials"
+      - "agent_create_employee"
+      - "tickets"
+      - "approve_order"
+      - "services"
+      - "tools"
+      - "modify_service"
+      - "company_admin"
+      - "notifications"
+  featureFlags:
+    type: array
+    description: Feature flags enabled for the user
+    items:
+      type: string
+    example: []
+  companyName:
+    type: string
+    example: "Megacompany"
+  invitationPending:
+    type: boolean
+    description: Whether an invitation is pending for this user
+    example: false
+  mfaEnabled:
+    type: boolean
+    description: Whether MFA is enabled for this user
+    example: false
+  name:
+    type: string
+    description: Full name of the user
+    example: "Kate Peters"
+  createDate:
+    type: string
+    format: date-time
+    description: Date when the user was created
+    nullable: true
+  lastUpdateDate:
+    type: string
+    format: date-time
+    description: Date when the user was last updated
+    nullable: true
+  lastLoginDate:
+    type: string
+    format: date-time
+    description: Date when the user last logged in
+    nullable: true
+required:
+  - emails
+  - companyId
+  - email
+  - employmentId
+  - firstName
+  - lastName
+  - personId
+  - personUid

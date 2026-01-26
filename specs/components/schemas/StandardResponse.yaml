@@ -1,0 +1,18 @@
+type: object
+description: Standard API response structure
+properties:
+  message:
+    type: string
+    description: Response message indicating the result of the operation
+    example: "Operation completed successfully"
+  terms:
+    type: string
+    description: Acceptable Use Policy terms
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+  data:
+    type: object
+    description: Response data payload (structure varies by endpoint)
+    additionalProperties: true
+required:
+  - message
+  - terms

@@ -1,0 +1,558 @@
+
+Running 47 tests using 6 workers
+  ✘   1 … respond within acceptable time threshold @ci @api @performance (618ms)
+  ✓   2 …os › should return 200 with a valid Bearer token @ci @api @auth (577ms)
+  ✘   3 …ould accept valid mveVendor: Aruba @ci @api @istqb @equivalence (592ms)
+  ✘   4 …ould filter locations by metro - Singapore @ci @api @functional (599ms)
+  ✘   5 …idate latitude and longitude fields @ci @api @functional @istqb (589ms)
+  ✘   6 …t marketEnabled as false (default) @ci @api @istqb @equivalence (564ms)
+  ✓   7 …n 401 Unauthorized with a missing token @ci @api @auth @negative (68ms)
+  ✓   8 … 401 Unauthorized with an invalid token @ci @api @auth @negative (61ms)
+  ✘   9 … › should validate response against JSON schema @ci @api @schema (78ms)
+Schema validation errors: [
+  {
+    instancePath: '',
+    schemaPath: '#/required',
+    keyword: 'required',
+    params: { missingProperty: 'data' },
+    message: "must have required property 'data'"
+  }
+]
+  ✘  10 …ould accept valid mveVendor: Cisco @ci @api @istqb @equivalence (215ms)
+  ✘  11 …alid marketEnabled value @ci @api @istqb @equivalence @negative (248ms)
+  ✘  12 …ept valid locationStatuses: Active @ci @api @istqb @equivalence (240ms)
+  ✓  13 …dle concurrent requests efficiently @ci @api @performance @load (293ms)
+  ✘  14 …› should handle multiple filter parameters @ci @api @functional (270ms)
+  ✓  15 …t should have the correct Content-Type header @ci @api @headers (250ms)
+  ✘  16 … handle dynamically generated query parameters @ci @api @dynamic (69ms)
+  ✘  17 …ion & Schema › should validate status codes for success @ci @api (64ms)
+  ✘  18 …d accept valid mveVendor: Fortinet @ci @api @istqb @equivalence (283ms)
+  ✘  19 …t valid locationStatuses: Extended @ci @api @istqb @equivalence (243ms)
+  ✓  20 …ting › should handle minimum boundary values @ci @api @boundary (232ms)
+  ✘  21 …d filter by marketEnabled parameter @ci @api @functional @istqb (240ms)
+  ✓  22 …› should generate unique test data on each run @ci @api @dynamic (12ms)
+  ✘  23 …metro filter with different metro - London @ci @api @functional (230ms)
+  ✘  24 …eve locations with valid parameters @ci @api @functional @smoke (237ms)
+  ✘  25 …sting › should handle maximum boundary values @ci @api @boundary (56ms)
+  ✘  26 …valid locationStatuses: Deployment @ci @api @istqb @equivalence (241ms)
+  ✘  27 …ould accept valid mveVendor: Versa @ci @api @istqb @equivalence (238ms)
+  ✓  28 …ary Testing › should handle empty parameters @ci @api @boundary (266ms)
+  ✘  29 …lter by mveVendor parameter - Aruba @ci @api @functional @istqb (246ms)
+  ✘  30 …y or filtered results for non-existent metro @ci @api @negative (212ms)
+  ✘  31 …s Path › should filter locations by status @ci @api @functional (237ms)
+  ✓  32 …return 400 Bad Request for invalid parameters @ci @api @negative (57ms)
+  ✘  33 …hould handle invalid Accept header gracefully @ci @api @negative (63ms)
+  ✘  34 …accept valid locationStatuses: New @ci @api @istqb @equivalence (244ms)
+  ✘  35 …uld accept valid mveVendor: VMWare @ci @api @istqb @equivalence (226ms)
+  ✘  36 …API Tests › Original: /v2/locations basic test @ci @api @legacy (218ms)
+  ✘  37 …lter by mveVendor parameter - Cisco @ci @api @functional @istqb (211ms)
+  ✓  38 … appropriate error for non-existent endpoint @ci @api @negative (218ms)
+  ✘  39 …valid locationStatuses: Restricted @ci @api @istqb @equivalence (219ms)
+  ✘  40 … accept valid mveVendor: Palo Alto @ci @api @istqb @equivalence (209ms)
+  ✘  41 …le multiple locationStatuses values @ci @api @functional @istqb (217ms)
+  ✘  42 … invalid mveVendor value @ci @api @istqb @equivalence @negative (262ms)
+  ✘  43 …pt valid locationStatuses: Expired @ci @api @istqb @equivalence (240ms)
+  ✘  44 …e diversityZones object in response @ci @api @functional @istqb (245ms)
+  ✘  45 …d locationStatuses value @ci @api @istqb @equivalence @negative (235ms)
+  ✘  46 …hould accept marketEnabled as true @ci @api @istqb @equivalence (235ms)
+  ✘  47 …e MVE sizes and details in response @ci @api @functional @istqb (244ms)
+  1) [api-tests] › tests/api/v2.locations.spec.ts:137:13 › /v2/locations API Tests › Validation & Schema › should validate response against JSON schema @ci @api @schema
+    Error: expect(received).toBeTruthy()
+    Received: false
+      153 |                     console.error("Schema validation errors:", validateSchema.errors);
+      154 |                 }
+    > 155 |                 expect(isValid).toBeTruthy();
+          |                                 ^
+      156 |             },
+      157 |         );
+      158 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:155:33
+  2) [api-tests] › tests/api/v2.locations.spec.ts:172:13 › /v2/locations API Tests › Validation & Schema › should validate status codes for success @ci @api
+    Error: expect(received).toBeTruthy()
+    Received: false
+      175 |                 await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE });
+      176 |
+    > 177 |                 expect(api.getResponse().ok()).toBeTruthy();
+          |                                                ^
+      178 |             },
+      179 |         );
+      180 |     });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:177:48
+  3) [api-tests] › tests/api/v2.locations.spec.ts:185:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should successfully retrieve locations with valid parameters @ci @api @functional @smoke
+    Error: expect(received).toContain(expected) // indexOf
+    Expected substring: "List all public locations"
+    Received string:    "Bad session token - try logging in again."
+      191 |                 const body = await api.getRequest(PayloadBuilder.generateValidLocationParams()).then(() => api.getBody());
+      192 |
+    > 193 |                 expect(body?.message).toContain("List all public locations");
+          |                                       ^
+      194 |
+      195 |                 // Validate response structure
+      196 |                 expect(body).toHaveProperty("message");
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:193:39
+  4) [api-tests] › tests/api/v2.locations.spec.ts:224:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter locations by status @ci @api @functional
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      228 |
+      229 |                 // Validate data is returned
+    > 230 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      231 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      232 |
+      233 |                 // Verify all returned locations have the Active status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:230:30
+  5) [api-tests] › tests/api/v2.locations.spec.ts:242:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter locations by metro - Singapore @ci @api @functional
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      249 |
+      250 |                 // Validate data is returned
+    > 251 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      252 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      253 |                 expect(body.data.length).toBeGreaterThan(0);
+      254 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:251:30
+  6) [api-tests] › tests/api/v2.locations.spec.ts:279:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should handle multiple filter parameters @ci @api @functional
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      286 |
+      287 |                 expect(body?.message).toBeDefined();
+    > 288 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      289 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      290 |
+      291 |                 // All locations should match both filters
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:288:30
+  7) [api-tests] › tests/api/v2.locations.spec.ts:301:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by marketEnabled parameter @ci @api @functional @istqb
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      306 |             async () => {
+      307 |                 const body = await api.getRequest({ marketEnabled: true }).then(() => api.getBody());
+    > 308 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      309 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      310 |             },
+      311 |         );
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:308:30
+  8) [api-tests] › tests/api/v2.locations.spec.ts:313:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by mveVendor parameter - Aruba @ci @api @functional @istqb
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      318 |             async () => {
+      319 |                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
+    > 320 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      321 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      322 |
+      323 |                 // If MVE data exists, validate sizes array
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:320:30
+  9) [api-tests] › tests/api/v2.locations.spec.ts:330:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by mveVendor parameter - Cisco @ci @api @functional @istqb
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      335 |             async () => {
+      336 |                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.CISCO }).then(() => api.getBody());
+    > 337 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      338 |             },
+      339 |         );
+      340 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:337:30
+  10) [api-tests] › tests/api/v2.locations.spec.ts:341:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should handle multiple locationStatuses values @ci @api @functional @istqb
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      352 |                     ],
+      353 |                 }).then(() => api.getBody());
+    > 354 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      355 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      356 |
+      357 |                 // Verify returned locations have one of the requested statuses
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:354:30
+  11) [api-tests] › tests/api/v2.locations.spec.ts:366:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate diversityZones object in response @ci @api @functional @istqb
+    TypeError: Cannot read properties of undefined (reading 'length')
+      372 |                 const body = await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE }).then(() => api.getBody());
+      373 |
+    > 374 |                 if (body.data.length > 0) {
+          |                               ^
+      375 |                     const locationWithDiversity = body.data.find(
+      376 |                         (loc: any) => loc.diversityZones,
+      377 |                     );
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:374:31
+  12) [api-tests] › tests/api/v2.locations.spec.ts:405:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate MVE sizes and details in response @ci @api @functional @istqb
+    TypeError: Cannot read properties of undefined (reading 'length')
+      411 |                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
+      412 |
+    > 413 |                 if (body.data.length > 0) {
+          |                               ^
+      414 |                     const locationWithMve = body.data.find((loc: any) => loc.mve);
+      415 |                     if (locationWithMve) {
+      416 |                         expect(locationWithMve.mve).toHaveProperty("sizes");
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:413:31
+  13) [api-tests] › tests/api/v2.locations.spec.ts:442:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate latitude and longitude fields @ci @api @functional @istqb
+    TypeError: Cannot read properties of undefined (reading 'length')
+      451 |                 }).then(() => api.getBody());
+      452 |
+    > 453 |                 if (body.data.length > 0) {
+          |                               ^
+      454 |                     const location = body.data[0];
+      455 |                     expect(location).toHaveProperty("latitude");
+      456 |                     expect(location).toHaveProperty("longitude");
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:453:31
+  14) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Active @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  15) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Extended @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  16) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Deployment @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  17) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: New @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  18) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Restricted @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  19) [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Expired @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      490 |                 async () => {
+      491 |                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+    > 492 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      493 |                     expect(Array.isArray(body.data)).toBeTruthy();
+      494 |
+      495 |                     // Verify all returned locations have the requested status
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:492:34
+  20) [api-tests] › tests/api/v2.locations.spec.ts:505:13 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should handle invalid locationStatuses value @ci @api @istqb @equivalence @negative
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 400]
+      512 |
+      513 |                 // API may return 200 with empty data or 400 Bad Request
+    > 514 |                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
+          |                                                                   ^
+      515 |                     api.status(),
+      516 |                 );
+      517 |             },
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:514:67
+  21) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Aruba @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  22) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Cisco @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  23) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Fortinet @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  24) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Versa @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  25) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: VMWare @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  26) [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Palo Alto @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      537 |                 async () => {
+      538 |                     const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+    > 539 |                     expect(body).toHaveProperty("data");
+          |                                  ^
+      540 |                 },
+      541 |             );
+      542 |         });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:539:34
+  27) [api-tests] › tests/api/v2.locations.spec.ts:544:13 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should handle invalid mveVendor value @ci @api @istqb @equivalence @negative
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 400]
+      551 |
+      552 |                 // API may return 200 with empty data or 400 Bad Request
+    > 553 |                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
+          |                                                                   ^
+      554 |                     api.status(),
+      555 |                 );
+      556 |             },
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:553:67
+  28) [api-tests] › tests/api/v2.locations.spec.ts:563:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should accept marketEnabled as true @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      565 |             async () => {
+      566 |                 const body = await api.getRequest({ marketEnabled: true }).then(() => api.getBody());
+    > 567 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      568 |             },
+      569 |         );
+      570 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:567:30
+  29) [api-tests] › tests/api/v2.locations.spec.ts:571:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should accept marketEnabled as false (default) @ci @api @istqb @equivalence
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      573 |             async () => {
+      574 |                 const body = await api.getRequest({ marketEnabled: false }).then(() => api.getBody());
+    > 575 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      576 |             },
+      577 |         );
+      578 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:575:30
+  30) [api-tests] › tests/api/v2.locations.spec.ts:579:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should handle invalid marketEnabled value @ci @api @istqb @equivalence @negative
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 400]
+      586 |
+      587 |                 // API may return 400 or coerce to boolean
+    > 588 |                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
+          |                                                                   ^
+      589 |                     api.status(),
+      590 |                 );
+      591 |             },
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:588:67
+  31) [api-tests] › tests/api/v2.locations.spec.ts:606:13 › /v2/locations API Tests › Boundary Testing › should handle maximum boundary values @ci @api @boundary
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 400]
+      610 |
+      611 |                 // API should handle large values gracefully (200 or 400)
+    > 612 |                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
+          |                                                                   ^
+      613 |                     api.status(),
+      614 |                 );
+      615 |             },
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:612:67
+  32) [api-tests] › tests/api/v2.locations.spec.ts:644:13 › /v2/locations API Tests › Error Handling › should handle invalid Accept header gracefully @ci @api @negative
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 406]
+      652 |
+      653 |                 // API should either return JSON anyway or 406 Not Acceptable
+    > 654 |                 expect([HTTP_STATUS.OK, 406]).toContain(api.status());
+          |                                               ^
+      655 |             },
+      656 |         );
+      657 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:654:47
+  33) [api-tests] › tests/api/v2.locations.spec.ts:671:13 › /v2/locations API Tests › Performance Testing › should respond within acceptable time threshold @ci @api @performance
+    Error: expect(received).toBeLessThan(expected)
+    Expected: < 600
+    Received:   606
+      675 |                 await api.getRequest(PayloadBuilder.generateValidLocationParams());
+      676 |                 const duration = Date.now() - startTime;
+    > 677 |                 expect(duration).toBeLessThan(
+          |                                  ^
+      678 |                     PERFORMANCE_THRESHOLDS.API_RESPONSE_TIME + 100,
+      679 |                 );
+      680 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:677:34
+  34) [api-tests] › tests/api/v2.locations.spec.ts:722:13 › /v2/locations API Tests › Dynamic Data Testing › should handle dynamically generated query parameters @ci @api @dynamic
+    Error: expect(received).toContain(expected) // indexOf
+    Expected value: 401
+    Received array: [200, 400]
+      731 |
+      732 |                 // Should handle various parameter combinations
+    > 733 |                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
+          |                                                                   ^
+      734 |                     api.status(),
+      735 |                 );
+      736 |
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:733:67
+  35) [api-tests] › tests/api/v2.locations.spec.ts:760:13 › /v2/locations API Tests › Additional Metro Filter Tests › should validate metro filter with different metro - London @ci @api @functional
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      768 |                     .get();
+      769 |
+    > 770 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      771 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      772 |
+      773 |                 // All locations should be in the London metro
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:770:30
+  36) [api-tests] › tests/api/v2.locations.spec.ts:782:13 › /v2/locations API Tests › Additional Metro Filter Tests › should return empty or filtered results for non-existent metro @ci @api @negative
+    Error: expect(received).toHaveProperty(path)
+    Expected path: "data"
+    Received path: []
+    Received value: {"message": "Bad session token - try logging in again.", "terms": "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"}
+      790 |                     .get();
+      791 |
+    > 792 |                 expect(body).toHaveProperty("data");
+          |                              ^
+      793 |                 expect(Array.isArray(body.data)).toBeTruthy();
+      794 |                 // Should return an empty array or handle gracefully
+      795 |                 expect(body.data.length).toBe(0);
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:792:30
+  37) [api-tests] › tests/api/v2.locations.spec.ts:801:9 › /v2/locations API Tests › Original: /v2/locations basic test @ci @api @legacy
+    Error: expect(received).toContain(expected) // indexOf
+    Expected substring: "List all public locations"
+    Received string:    "Bad session token - try logging in again."
+      811 |                 Accept: "*/*",
+      812 |             }).then(() => api.getBody());
+    > 813 |             expect(body?.message).toContain("List all public locations");
+          |                                   ^
+      814 |         },
+      815 |     );
+      816 | });
+        at /home/test/APITestingTask/tests/api/v2.locations.spec.ts:813:35
+  37 failed
+    [api-tests] › tests/api/v2.locations.spec.ts:137:13 › /v2/locations API Tests › Validation & Schema › should validate response against JSON schema @ci @api @schema
+    [api-tests] › tests/api/v2.locations.spec.ts:172:13 › /v2/locations API Tests › Validation & Schema › should validate status codes for success @ci @api
+    [api-tests] › tests/api/v2.locations.spec.ts:185:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should successfully retrieve locations with valid parameters @ci @api @functional @smoke
+    [api-tests] › tests/api/v2.locations.spec.ts:224:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter locations by status @ci @api @functional
+    [api-tests] › tests/api/v2.locations.spec.ts:242:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter locations by metro - Singapore @ci @api @functional
+    [api-tests] › tests/api/v2.locations.spec.ts:279:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should handle multiple filter parameters @ci @api @functional
+    [api-tests] › tests/api/v2.locations.spec.ts:301:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by marketEnabled parameter @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:313:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by mveVendor parameter - Aruba @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:330:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should filter by mveVendor parameter - Cisco @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:341:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should handle multiple locationStatuses values @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:366:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate diversityZones object in response @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:405:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate MVE sizes and details in response @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:442:13 › /v2/locations API Tests › Functional Test Cases - Success Path › should validate latitude and longitude fields @ci @api @functional @istqb
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Active @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Extended @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Deployment @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: New @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Restricted @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:488:17 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should accept valid locationStatuses: Expired @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:505:13 › /v2/locations API Tests › Equivalence Partitioning - locationStatus › should handle invalid locationStatuses value @ci @api @istqb @equivalence @negative
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Aruba @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Cisco @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Fortinet @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Versa @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: VMWare @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:535:17 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should accept valid mveVendor: Palo Alto @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:544:13 › /v2/locations API Tests › Equivalence Partitioning - mveVendor › should handle invalid mveVendor value @ci @api @istqb @equivalence @negative
+    [api-tests] › tests/api/v2.locations.spec.ts:563:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should accept marketEnabled as true @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:571:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should accept marketEnabled as false (default) @ci @api @istqb @equivalence
+    [api-tests] › tests/api/v2.locations.spec.ts:579:13 › /v2/locations API Tests › Equivalence Partitioning - marketEnabled › should handle invalid marketEnabled value @ci @api @istqb @equivalence @negative
+    [api-tests] › tests/api/v2.locations.spec.ts:606:13 › /v2/locations API Tests › Boundary Testing › should handle maximum boundary values @ci @api @boundary
+    [api-tests] › tests/api/v2.locations.spec.ts:644:13 › /v2/locations API Tests › Error Handling › should handle invalid Accept header gracefully @ci @api @negative
+    [api-tests] › tests/api/v2.locations.spec.ts:671:13 › /v2/locations API Tests › Performance Testing › should respond within acceptable time threshold @ci @api @performance
+    [api-tests] › tests/api/v2.locations.spec.ts:722:13 › /v2/locations API Tests › Dynamic Data Testing › should handle dynamically generated query parameters @ci @api @dynamic
+    [api-tests] › tests/api/v2.locations.spec.ts:760:13 › /v2/locations API Tests › Additional Metro Filter Tests › should validate metro filter with different metro - London @ci @api @functional
+    [api-tests] › tests/api/v2.locations.spec.ts:782:13 › /v2/locations API Tests › Additional Metro Filter Tests › should return empty or filtered results for non-existent metro @ci @api @negative
+    [api-tests] › tests/api/v2.locations.spec.ts:801:9 › /v2/locations API Tests › Original: /v2/locations basic test @ci @api @legacy
+  10 passed (11.7s)
+To open last HTML report run:
+  npx playwright show-report

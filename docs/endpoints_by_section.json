@@ -1,0 +1,342 @@
+{
+  "endpoints": [
+    {
+      "section_id": "1c15ca21-5ba2-461e-9b56-342e46cd1262",
+      "method": "POST",
+      "name": "Generate Access Token - Staging",
+      "url": null,
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "660ab4be-2aa6-4a71-93d4-070f09dd8ac4",
+      "method": "GET",
+      "name": "Get Billing Markets",
+      "url": "/v2/market",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "b951a109-b283-4da1-a1eb-5338d0b2699a",
+      "method": "PUT",
+      "name": "Update User Details",
+      "url": "/v2/employee/:employeeId",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "9b9f90ef-3d5b-4c03-8d85-156d1bca09f6",
+      "method": "DELETE",
+      "name": "Delete Invited User",
+      "url": "/v2/employee/:employeeId",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "5a78f67f-5ea4-45f8-b72d-e2b0be065bf8",
+      "method": "PUT",
+      "name": "Reset Person Multi-Factor Authentication",
+      "url": "/v2/employee/:employeeId/mfa",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "12172490-dec1-4d52-9b70-19ce41fd7cb0",
+      "method": "DELETE",
+      "name": "Disable Person Multi-Factor Authentication",
+      "url": "/v2/employee/:employeeId/mfa",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "c5b935b8-85ce-465b-875f-80b3c44887f7",
+      "method": "POST",
+      "name": "Log in With Username and Password (v3)",
+      "url": "/v3/login",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "1375559a-9b3c-4d76-9636-85f5f2e0c945",
+      "method": "POST",
+      "name": "Change Password",
+      "url": "/v2/password/change",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "c276af3b-884e-481a-bb3e-9ad5a22471cc",
+      "method": "GET",
+      "name": "Partner Megaports",
+      "url": "/v2/dropdowns/partner/megaports?connectType={cloudProvider}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "7090fd71-77bc-436b-a5d3-266c500c6b47",
+      "method": "GET",
+      "name": "IX Locations",
+      "url": "/v2/product/ix/types?locationId={locationId}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "d7cf5da7-90eb-4a35-854c-884d846b58ac",
+      "method": "POST",
+      "name": "Validate Port Order (v3)",
+      "url": "/v3/networkdesign/validate",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "450901e5-e03f-4ef2-b38c-1f0167726818",
+      "method": "POST",
+      "name": "Buy Port (v3)",
+      "url": "/v3/networkdesign/buy",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "ec0d635e-9cc3-424c-a622-1707c397c553",
+      "method": "GET",
+      "name": "Look Up AWS Hosted Connection Port Details",
+      "url": "/v2/secure/awshc",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "0066ff52-2721-426d-a609-071da6cb6e16",
+      "method": "PUT",
+      "name": "Update Azure VXC (v3)",
+      "url": "/v3/product/vxc/{productUid}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "115e9569-28cb-46b8-8a8a-3bc543d73a53",
+      "method": "PUT",
+      "name": "Update Google VXC (v3)",
+      "url": "/v3/product/vxc/{productUid}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "39860bc8-b826-40b5-b73b-16f9c99c804e",
+      "method": "GET",
+      "name": "Look Up SAP Service Key",
+      "url": "/v2/service/key?key={keyValue}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "14181dc3-da25-4abd-a7c0-2e5a1f764f3c",
+      "method": "POST",
+      "name": "Create VXC to SAP (v3)",
+      "url": "/v3/networkdesign/buy",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    },
+    {
+      "section_id": "e506e1b9-bbc5-472a-b73a-dbe10717e650",
+      "method": "PUT",
+      "name": "Update AWS Hosted VIF VXC (v3)",
+      "url": "/v3/product/vxc/{productUid}",
+      "parameters": [],
+      "request_body": null,
+      "response_examples": []
+    }
+  ],
+  "version_groups": {
+    "v1": [],
+    "v2": [
+      {
+        "section_id": "660ab4be-2aa6-4a71-93d4-070f09dd8ac4",
+        "method": "GET",
+        "name": "Get Billing Markets",
+        "url": "/v2/market",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "b951a109-b283-4da1-a1eb-5338d0b2699a",
+        "method": "PUT",
+        "name": "Update User Details",
+        "url": "/v2/employee/:employeeId",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "9b9f90ef-3d5b-4c03-8d85-156d1bca09f6",
+        "method": "DELETE",
+        "name": "Delete Invited User",
+        "url": "/v2/employee/:employeeId",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "5a78f67f-5ea4-45f8-b72d-e2b0be065bf8",
+        "method": "PUT",
+        "name": "Reset Person Multi-Factor Authentication",
+        "url": "/v2/employee/:employeeId/mfa",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "12172490-dec1-4d52-9b70-19ce41fd7cb0",
+        "method": "DELETE",
+        "name": "Disable Person Multi-Factor Authentication",
+        "url": "/v2/employee/:employeeId/mfa",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "1375559a-9b3c-4d76-9636-85f5f2e0c945",
+        "method": "POST",
+        "name": "Change Password",
+        "url": "/v2/password/change",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "c276af3b-884e-481a-bb3e-9ad5a22471cc",
+        "method": "GET",
+        "name": "Partner Megaports",
+        "url": "/v2/dropdowns/partner/megaports?connectType={cloudProvider}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "7090fd71-77bc-436b-a5d3-266c500c6b47",
+        "method": "GET",
+        "name": "IX Locations",
+        "url": "/v2/product/ix/types?locationId={locationId}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "ec0d635e-9cc3-424c-a622-1707c397c553",
+        "method": "GET",
+        "name": "Look Up AWS Hosted Connection Port Details",
+        "url": "/v2/secure/awshc",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "39860bc8-b826-40b5-b73b-16f9c99c804e",
+        "method": "GET",
+        "name": "Look Up SAP Service Key",
+        "url": "/v2/service/key?key={keyValue}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      }
+    ],
+    "v3": [
+      {
+        "section_id": "c5b935b8-85ce-465b-875f-80b3c44887f7",
+        "method": "POST",
+        "name": "Log in With Username and Password (v3)",
+        "url": "/v3/login",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "d7cf5da7-90eb-4a35-854c-884d846b58ac",
+        "method": "POST",
+        "name": "Validate Port Order (v3)",
+        "url": "/v3/networkdesign/validate",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "450901e5-e03f-4ef2-b38c-1f0167726818",
+        "method": "POST",
+        "name": "Buy Port (v3)",
+        "url": "/v3/networkdesign/buy",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "0066ff52-2721-426d-a609-071da6cb6e16",
+        "method": "PUT",
+        "name": "Update Azure VXC (v3)",
+        "url": "/v3/product/vxc/{productUid}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "115e9569-28cb-46b8-8a8a-3bc543d73a53",
+        "method": "PUT",
+        "name": "Update Google VXC (v3)",
+        "url": "/v3/product/vxc/{productUid}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "14181dc3-da25-4abd-a7c0-2e5a1f764f3c",
+        "method": "POST",
+        "name": "Create VXC to SAP (v3)",
+        "url": "/v3/networkdesign/buy",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      },
+      {
+        "section_id": "e506e1b9-bbc5-472a-b73a-dbe10717e650",
+        "method": "PUT",
+        "name": "Update AWS Hosted VIF VXC (v3)",
+        "url": "/v3/product/vxc/{productUid}",
+        "parameters": [],
+        "request_body": null,
+        "response_examples": []
+      }
+    ],
+    "v4": []
+  },
+  "unversioned": [],
+  "stats": {
+    "total_endpoints": 18,
+    "by_version": {
+      "v2": 10,
+      "v3": 7
+    },
+    "unversioned": 0,
+    "by_method": {
+      "POST": 6,
+      "GET": 5,
+      "PUT": 5,
+      "DELETE": 2
+    }
+  }
+}

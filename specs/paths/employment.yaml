@@ -1,0 +1,68 @@
+v2-employment:
+  get:
+    tags:
+      - User Management
+    summary: List Company Users
+    description: |
+      Returns user information for all users in the company.
+
+      The response includes the name, email address, phone number, username, Megaport role, 
+      Megaport permissions, and whether MFA is enabled for the user.
+
+      **Note**: The response now includes `createDate`, `lastUpdateDate`, and `lastLoginDate` 
+      fields for logged-in users and Company Admin users (added November 2025).
+    operationId: listCompanyUsers
+    security:
+      - BearerAuth: []
+    responses:
+      "200":
+        description: Successfully retrieved list of company users
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/EmploymentListResponse.yaml"
+            examples:
+              success:
+                summary: List of company users
+                value:
+                  message: "Found Employments for Company 1153"
+                  terms: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+                  data:
+                    - emails:
+                        - emailAddressId: 47162
+                          email: "kate.peters@example.com"
+                          primary: true
+                          badEmail: false
+                      companyId: 1153
+                      email: "kate.peters@example.com"
+                      employmentId: 51193
+                      firstName: "Kate"
+                      lastName: "Peters"
+                      personId: 57278
+                      personUid: "cec8e72a-5491-47bf-af2e-0a241e14c679"
+                      position: "Company Admin"
+                      positionId: 1983
+                      username: "kate.peters@example.com"
+                      billingContact: true
+                      technicalContact: true
+                      notificationEnabled: true
+                      employmentType: "REAL"
+                      active: true
+                      requireTotp: false
+                      securityRoles: ["companyAdmin"]
+                      permissions:
+                        - "financials"
+                        - "services"
+                        - "company_admin"
+                      companyName: "Megacompany"
+                      invitationPending: false
+                      mfaEnabled: false
+                      name: "Kate Peters"
+      "401":
+        $ref: "../megaport-api.yaml#/components/responses/Unauthorized"
+      "403":
+        $ref: "../megaport-api.yaml#/components/responses/Forbidden"
+      "500":
+        $ref: "../megaport-api.yaml#/components/responses/ServerError"
+      "503":
+        $ref: "../megaport-api.yaml#/components/responses/ServiceUnavailable"

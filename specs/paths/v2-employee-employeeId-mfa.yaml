@@ -1,0 +1,89 @@
+/v2/employee/{employeeId}/mfa:
+  put:
+    operationId: putResetPersonMultifactorAuthentication
+    tags:
+    - MFA
+    summary: Reset Person Multi-Factor Authentication
+    description: Reset Person Multi-Factor Authentication
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                terms:
+                  type: string
+                data:
+                  type: object
+      '400':
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+    parameters:
+    - name: employeeId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The employeeId parameter
+    security:
+    - BearerAuth: []
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  delete:
+    operationId: deleteDisablePersonMultifactorAuthentication
+    tags:
+    - MFA
+    summary: Disable Person Multi-Factor Authentication
+    description: Disable Person Multi-Factor Authentication
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                terms:
+                  type: string
+                data:
+                  type: object
+      '400':
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+    parameters:
+    - name: employeeId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The employeeId parameter
+    security:
+    - BearerAuth: []

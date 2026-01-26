@@ -1,0 +1,48 @@
+/v2/dropdowns/partner/megaports:
+  get:
+    operationId: getPartnerMegaports
+    tags:
+    - Partners
+    summary: Partner Megaports
+    description: Partner Megaports
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  type: string
+                terms:
+                  type: string
+                data:
+                  type: object
+      '400':
+        description: Bad request
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+      '401':
+        description: Unauthorized
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ErrorResponse'
+    parameters:
+    - name: cloudProvider
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The cloudProvider parameter
+    - name: connectType
+      in: query
+      required: false
+      schema:
+        type: string
+      description: The connectType query parameter
+    security:
+    - BearerAuth: []

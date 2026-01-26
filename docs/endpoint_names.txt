@@ -1,0 +1,18 @@
+Buy Port (v3)
+Change Password
+Create VXC to SAP (v3)
+Delete Invited User
+Disable Person Multi-Factor Authentication
+Generate Access Token - Staging
+Get Billing Markets
+IX Locations
+Log in With Username and Password (v3)
+Look Up AWS Hosted Connection Port Details
+Look Up SAP Service Key
+Partner Megaports
+Reset Person Multi-Factor Authentication
+Update AWS Hosted VIF VXC (v3)
+Update Azure VXC (v3)
+Update Google VXC (v3)
+Update User Details
+Validate Port Order (v3)

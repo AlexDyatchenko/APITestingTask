@@ -1,0 +1,150 @@
+v2-employee-mfa:
+  put:
+    tags:
+      - Multi-Factor Authentication
+    summary: Reset Person Multi-Factor Authentication
+    description: |
+      Resets Multi-Factor Authentication (MFA) for a user.
+
+      This is equivalent to resetting MFA for a user from the User Profile option under the 
+      user's name in the Megaport Portal. For more information, see: 
+      https://docs.megaport.com/setting-up/manage-profile/
+
+      You can find the employee ID (`personId`) using the GET List Company Users `/v2/employment` endpoint.
+
+      When MFA is enabled for a user, it can be reset to enroll a new mobile device. You can 
+      reset MFA for a user regardless of the global MFA setting for your company.
+
+      **Important Notes:**
+      - The user will remain logged in to the Megaport Portal when resetting MFA
+      - Resetting MFA does not disable MFA for the user account
+      - Megaport Support cannot reset or regenerate QR codes; a Company Admin must perform this task
+
+      For more information, see: https://docs.megaport.com/setting-up/enforcing-mfa/
+    operationId: resetPersonMFA
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: "../megaport-api.yaml#/components/parameters/EmployeeId"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "../components/schemas/MFAResetRequest.yaml"
+          example:
+            totpSecret: "G4C3S6MBH2HSF2EV"
+            totpCode: "123456"
+    responses:
+      "200":
+        description: MFA reset successful
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/MFAResponse.yaml"
+            example:
+              message: "Your MFA has been reset successfully"
+              terms: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+      "400":
+        $ref: "../megaport-api.yaml#/components/responses/BadRequest"
+      "401":
+        $ref: "../megaport-api.yaml#/components/responses/Unauthorized"
+      "403":
+        $ref: "../megaport-api.yaml#/components/responses/Forbidden"
+      "500":
+        $ref: "../megaport-api.yaml#/components/responses/ServerError"
+      "503":
+        $ref: "../megaport-api.yaml#/components/responses/ServiceUnavailable"
+
+  delete:
+    tags:
+      - Multi-Factor Authentication
+    summary: Disable Person Multi-Factor Authentication
+    description: |
+      Disables Multi-Factor Authentication (MFA) for a user.
+
+      MFA can be disabled for a user when MFA is set to optional globally for your company, 
+      and the user is currently using MFA to log in.
+
+      You can find the employee ID (`personId`) using the GET List Company Users `/v2/employment` endpoint.
+
+      **Important Notes:**
+      - You cannot disable MFA for a user if it has been enforced globally for all users by a Company Admin
+      - Disabling MFA means that the user's account is no longer secured with a second verification factor
+    operationId: disablePersonMFA
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: "../megaport-api.yaml#/components/parameters/EmployeeId"
+    responses:
+      "200":
+        description: MFA disabled successfully
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/MFAResponse.yaml"
+            example:
+              message: "Your MFA has been disabled successfully"
+              terms: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+      "400":
+        $ref: "../megaport-api.yaml#/components/responses/BadRequest"
+      "401":
+        $ref: "../megaport-api.yaml#/components/responses/Unauthorized"
+      "403":
+        $ref: "../megaport-api.yaml#/components/responses/Forbidden"
+      "500":
+        $ref: "../megaport-api.yaml#/components/responses/ServerError"
+      "503":
+        $ref: "../megaport-api.yaml#/components/responses/ServiceUnavailable"
+
+v2-employee-mfa-admin:
+  delete:
+    tags:
+      - Multi-Factor Authentication
+    summary: Admin Reset User Multi-Factor Authentication
+    description: |
+      Resets user Multi-Factor Authentication (MFA) by Company Admin.
+
+      You can use this endpoint, for example, if a user has lost their MFA device and MFA has 
+      been enabled. The user cannot log in so a Company Admin needs to reset their MFA, after 
+      which the user can set MFA up again later on their device during log in.
+
+      This is equivalent to resetting MFA for a user from the Company > Manage Users option 
+      in the Megaport Portal. For more information, see: 
+      https://docs.megaport.com/portal-admin/user-management/
+
+      You can find the employee ID (`personId`) using the GET List Company Users `/v2/employment` endpoint.
+    operationId: adminResetUserMFA
+    security:
+      - BearerAuth: []
+    parameters:
+      - $ref: "../megaport-api.yaml#/components/parameters/EmployeeId"
+    responses:
+      "200":
+        description: MFA reset successful by admin
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/MFAResponse.yaml"
+            example:
+              message: "The MFA of employee with ID = 45115 has been reset successfully"
+              terms: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+      "400":
+        $ref: "../megaport-api.yaml#/components/responses/BadRequest"
+      "401":
+        $ref: "../megaport-api.yaml#/components/responses/Unauthorized"
+      "403":
+        $ref: "../megaport-api.yaml#/components/responses/Forbidden"
+      "404":
+        description: Employee not found
+        content:
+          application/json:
+            schema:
+              $ref: "../components/schemas/ErrorResponse.yaml"
+            example:
+              message: "Employee not found"
+              terms: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+      "500":
+        $ref: "../megaport-api.yaml#/components/responses/ServerError"
+      "503":
+        $ref: "../megaport-api.yaml#/components/responses/ServiceUnavailable"

@@ -1,8 +1,38 @@
 # API Testing Project Setup Guide
 
-This project contains comprehensive API tests for the `/v2/locations` endpoint using Playwright Test framework with TypeScript, plus k6 performance testing with Grafana visualization.
+This project contains comprehensive API tests for the Megaport REST API using Playwright Test framework with TypeScript, complete OpenAPI 3.0.3 specifications, and k6 performance testing with Grafana visualization.
+
+## 📖 OpenAPI Specifications
+
+The project includes a complete OpenAPI 3.0.3 specification for the Megaport API, extracted from official documentation.
+
+### Quick Access
+
+- **Main Specification**: [`specs/megaport-api.yaml`](specs/megaport-api.yaml)
+- **Detailed README**: [`specs/README.md`](specs/README.md)
+- **Generation Summary**: [`OPENAPI_GENERATION_SUMMARY.md`](OPENAPI_GENERATION_SUMMARY.md)
+
+### Coverage
+
+- ✅ **26 API operations** across 17 paths
+- ✅ **2 API versions** (v2, v3)
+- ✅ **9 categories**: Authentication, Users, MFA, Markets, Partners, IX, Ports, VXCs, Cloud (AWS, Azure, Google, SAP)
+- ✅ **Modular structure** with reusable components
+- ✅ **Bearer JWT authentication**
+
+### View Documentation
+
+```bash
+# Install Redoc CLI
+npm install -g @redocly/cli
+
+# Preview API docs
+redocly preview-docs specs/megaport-api.yaml
+```
 
 ## Prerequisites
+
+This project contains comprehensive API tests for the `/v2/locations` endpoint using Playwright Test framework with TypeScript, plus k6 performance testing with Grafana visualization.
 
 Before you begin, ensure you have the following installed:
 

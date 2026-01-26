@@ -1,0 +1,94 @@
+type: object
+properties:
+  id:
+    type: integer
+  name:
+    type: string
+  campus:
+    type: string
+  metro:
+    type: string
+  country:
+    type: string
+  siteCode:
+    type: string
+  networkRegion:
+    type: string
+  address:
+    type: object
+    properties:
+      street:
+        type: string
+      suburb:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      postcode:
+        type: string
+  dc:
+    type: object
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+  market:
+    type: string
+  vRouterAvailable:
+    type: boolean
+  liveDate:
+    type: integer
+  status:
+    type: string
+    enum:
+      - Active
+      - Inactive
+      - Pending
+  longitude:
+    type: number
+    minimum: -180
+    maximum: 180
+  latitude:
+    type: number
+    minimum: -90
+    maximum: 90
+  products:
+    type: object
+    properties:
+      mcr:
+        type: boolean
+      mcrVersion:
+        type: integer
+      megaport:
+        type: array
+        items:
+          type: integer
+      mve:
+        type: array
+        items:
+          type: object
+      mcr1:
+        type: array
+        items:
+          type: integer
+      mcr2:
+        type: array
+        items:
+          type: integer
+  ordering_message:
+    type: string
+    nullable: true
+  diversityZones:
+    type: object
+  productCapacityMap:
+    type: object
+    nullable: true
+required:
+  - id
+  - name
+  - country
+  - siteCode
+  - networkRegion
+  - status

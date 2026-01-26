@@ -1,0 +1,20 @@
+type: object
+description: Response containing list of company users/employees
+properties:
+  message:
+    type: string
+    description: Response message
+    example: "Found Employments for Company 1153"
+  terms:
+    type: string
+    description: Acceptable Use Policy terms
+    example: "This data is subject to the Acceptable Use Policy https://www.megaport.com/legal/acceptable-use-policy"
+  data:
+    type: array
+    description: Array of employment records
+    items:
+      $ref: "./Employment.yaml"
+required:
+  - message
+  - terms
+  - data

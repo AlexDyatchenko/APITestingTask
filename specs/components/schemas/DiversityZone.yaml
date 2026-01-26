@@ -1,0 +1,14 @@
+type: object
+properties:
+  id:
+    type: string
+  name:
+    type: string
+  supportedPortSpeeds:
+    type: array
+    items:
+      type: number
+required:
+  - id
+  - name
+  - supportedPortSpeeds

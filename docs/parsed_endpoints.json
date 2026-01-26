@@ -1,0 +1,397 @@
+{
+  "endpoints": [
+    {
+      "method": "POST",
+      "name": "Generate Access Token - Staging",
+      "section_id": "doc-wrapper",
+      "url": "/v2/service/key?key=d2d7fd14'"
+    },
+    {
+      "method": "GET",
+      "name": "Get Billing Markets",
+      "section_id": "5209a0a7-910a-4fa5-8046-bbaffd0ac5fa",
+      "url": "/v2/service/key?key={keyValue}"
+    },
+    {
+      "method": "PUT",
+      "name": "Update User Details",
+      "section_id": "6713863b-f2c4-4fcf-9e7d-81262d8b20ae",
+      "url": "/v3/networkdesign/buy"
+    },
+    {
+      "method": "DELETE",
+      "name": "Delete Invited User",
+      "section_id": "9b9f90ef-3d5b-4c03-8d85-156d1bca09f6",
+      "url": "/v3/networkdesign/validate"
+    },
+    {
+      "method": "PUT",
+      "name": "Reset Person Multi-Factor Authentication",
+      "section_id": "c6db60b5-686a-4dac-9d6e-68307622f56a",
+      "url": "/v2/employee/45115/mfa'"
+    },
+    {
+      "method": "DELETE",
+      "name": "Disable Person Multi-Factor Authentication",
+      "section_id": "12172490-dec1-4d52-9b70-19ce41fd7cb0",
+      "url": "/v3/product/vxc/{productUid}"
+    },
+    {
+      "method": "POST",
+      "name": "Log in With Username and Password (v3)",
+      "section_id": "32b87c70-b9e8-47fc-b3f2-e8eedc629956",
+      "url": "/v2/dropdowns/partner/megaports?connectType={cloudProvider}&amp;vxcPermitted={boolean}"
+    },
+    {
+      "method": "POST",
+      "name": "Change Password",
+      "section_id": "1375559a-9b3c-4d76-9636-85f5f2e0c945",
+      "url": "/v3/product/vxc/7939344a-8a55-4a7e-b202-4db0967f4e32'"
+    },
+    {
+      "method": "GET",
+      "name": "Partner Megaports",
+      "section_id": "beef52ef-1fbd-42db-9db3-523e5a930b56",
+      "url": "/v3/login'"
+    },
+    {
+      "method": "GET",
+      "name": "IX Locations",
+      "section_id": "7090fd71-77bc-436b-a5d3-266c500c6b47",
+      "url": "/v2/secure/awshc'"
+    },
+    {
+      "method": "POST",
+      "name": "Validate Port Order (v3)",
+      "section_id": "60260442-bf65-45ab-bdb4-d90c06eb035c",
+      "url": "/v3/product/vxc/a1bf0e9a-7bbb-47c7-a3b7-4cbb701a3b42'"
+    },
+    {
+      "method": "POST",
+      "name": "Buy Port (v3)",
+      "section_id": "450901e5-e03f-4ef2-b38c-1f0167726818",
+      "url": "/v3/product/vxc/{productUid}'"
+    },
+    {
+      "method": "GET",
+      "name": "Look Up AWS Hosted Connection Port Details",
+      "section_id": "4954a300-94cf-43c3-b8ed-93af5c35001d",
+      "url": "/v2/market'"
+    },
+    {
+      "method": "PUT",
+      "name": "Update Azure VXC (v3)",
+      "section_id": "6f294053-7eaa-4ace-9581-62169f253caf",
+      "url": "/v2/password/change"
+    },
+    {
+      "method": "PUT",
+      "name": "Update Google VXC (v3)",
+      "section_id": "4e82dfe9-e893-4b81-932e-758d5645f138",
+      "url": "/v3/networkdesign/buy'"
+    },
+    {
+      "method": "GET",
+      "name": "Look Up SAP Service Key",
+      "section_id": "eb09e6e1-7471-49ae-8888-9977ba2cefce",
+      "url": "/v2/market"
+    },
+    {
+      "method": "POST",
+      "name": "Create VXC to SAP (v3)",
+      "section_id": "14181dc3-da25-4abd-a7c0-2e5a1f764f3c",
+      "url": "/v2/product/ix/types?locationId=2'"
+    },
+    {
+      "method": "PUT",
+      "name": "Update AWS Hosted VIF VXC (v3)",
+      "section_id": "76582b0c-3f3d-4320-a3f0-d48f906f2c6b",
+      "url": "/v3/networkdesign/validate'"
+    }
+  ],
+  "all_endpoints": [
+    {
+      "method": "POST",
+      "name": "Generate Access Token - Staging",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "Get Billing Markets",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "PUT",
+      "name": "Update User Details",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "DELETE",
+      "name": "Delete Invited User",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "PUT",
+      "name": "Reset Person Multi-Factor Authentication",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "DELETE",
+      "name": "Disable Person Multi-Factor Authentication",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "POST",
+      "name": "Log in With Username and Password (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "POST",
+      "name": "Change Password",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "Partner Megaports",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "IX Locations",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "POST",
+      "name": "Validate Port Order (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "POST",
+      "name": "Buy Port (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "Look Up AWS Hosted Connection Port Details",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "PUT",
+      "name": "Update Azure VXC (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "PUT",
+      "name": "Update Google VXC (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "Look Up SAP Service Key",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "POST",
+      "name": "Create VXC to SAP (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "PUT",
+      "name": "Update AWS Hosted VIF VXC (v3)",
+      "url": null,
+      "source": "main_content"
+    },
+    {
+      "method": "GET",
+      "name": "Get Billing Markets",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "POST",
+      "name": "Set Billing Market",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "POST",
+      "name": "Log in With Username and Password (v3)",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "POST",
+      "name": "Change Password",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "GET",
+      "name": "Log Out Session",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "GET",
+      "name": "Locations (v2)",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "GET",
+      "name": "Locations (v3)",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "GET",
+      "name": "Partner Megaports",
+      "url": null,
+      "source": "navigation"
+    },
+    {
+      "method": "GET",
+      "name": "IX Locations",
+      "url": null,
+      "source": "navigation"
+    }
+  ],
+  "paths_by_version": {
+    "2": [
+      "dropdowns/partner/megaports",
+      "dropdowns/partner/megaports?connectType={cloudProvider}&amp;vxcPermitted={boolean}",
+      "employee",
+      "employee/45115",
+      "employee/45115/mfa",
+      "employee/:employeeId",
+      "employee/:employeeId/mfa",
+      "employee/{employeeId}",
+      "employment",
+      "locations",
+      "login",
+      "managedCompanies",
+      "market",
+      "networkdesign/buy",
+      "networkdesign/validate",
+      "notificationPreferences",
+      "password/change",
+      "pricebook/mve",
+      "pricebook/vxc",
+      "product/7939344a-8a55-4a7e-b202-4db0967f4e32",
+      "product/a1bf0e9a-7bbb-47c7-a3b7-4cbb701a3b42",
+      "product/cxc",
+      "product/cxc/{productUid}",
+      "product/ix/types?locationId=2",
+      "product/ix/types?locationId={locationId}",
+      "product/mcr2/{productUid}/packetFilter",
+      "product/mcr2/{productUid}/packetFilter/{packetFilterId}",
+      "product/mcr2/{productUid}/packetFilters",
+      "product/mve/variants",
+      "product/vxc/{productUid}",
+      "product/{productUid}",
+      "product/{productUid}/action/{action}",
+      "product/{uid}",
+      "products",
+      "secure/awshc",
+      "secure/google/{pairing_key}",
+      "secure/inventory/companies/{companyUid}/services",
+      "secure/inventory/companies/{companyUid}/services/csv",
+      "service/key?key=d2d7fd14",
+      "service/key?key={keyValue}",
+      "totp/qrcode"
+    ],
+    "3": [
+      "company/${companyUid}/invoice/${invoiceId}",
+      "company/${companyUid}/invoice/${invoiceId}/csv",
+      "company/${companyUid}/invoice/${invoiceId}/pdf",
+      "company/${companyUid}/invoice/supplierId/{supplierId}?fromDate=${fromDate}&amp;toDate=${toDate}",
+      "locations",
+      "login",
+      "networkdesign/buy",
+      "networkdesign/validate",
+      "notificationPreferences",
+      "product/vxc/7939344a-8a55-4a7e-b202-4db0967f4e32",
+      "product/vxc/a1bf0e9a-7bbb-47c7-a3b7-4cbb701a3b42",
+      "product/vxc/{productUid}",
+      "product/vxc/{uid}",
+      "products/mcrs/{productUid}/ipsec"
+    ],
+    "4": [
+      "product/mve/images"
+    ],
+    "1": [
+      "status/maintenance",
+      "status/outage"
+    ]
+  },
+  "total_unique_paths": 58,
+  "descriptions": [
+    "Megaport offers a public API for access to all the services available through the Megaport Portal. You can use this API to automate your Megaport provisioning to save time and effort.",
+    "The Megaport API is based on REST. The API has predictable URLs, accepts form-encoded request bodies, returns JSON-encoded responses, and uses standard HTTP response codes.",
+    "There are two server environments that can be accessed using different URLs:",
+    "All API responses include standard HTTP response codes:",
+    "200 - OK. A successful request.",
+    "400 - Bad request. This error is typically caused by missing or incorrect request parameters.",
+    "401 - Unauthorized. This error indicates that the request is missing the required authentication credentials. Typically this means a missing or invalid API access token.",
+    "403 - Forbidden. You do not have the required permissions to perform this request.",
+    "500 - Server error. When this occurs, Megaport developers are notified of the error by email by the server.",
+    "503 - Server is unavailable, possibly down for maintenance.",
+    "A standard response to a request will include a message, plus optionally some data.",
+    "Max IPsec tunnel count limit for the MCR.",
+    "Total tunnel count - total number of configured tunnels for an MCR.",
+    "The list of IPsec configured tunnels with details, including:",
+    "VXC name",
+    "VXC product Uid",
+    "VLAN",
+    "IPsec tunnels (sourceIpAddress, destinationIpAddress, description)",
+    "POST /v3/networkdesign/validate",
+    "POST /v3/networkdesign/buy",
+    "PUT /v3/product/vxc/{uid}",
+    "GET MCR Packet Filter Details \u2013 /v2/product/mcr2/{productUid}/packetFilter/{packetFilterId}",
+    "GET MCR Packet Filter Summary List \u2013 /v2/product/mcr2/{productUid}/packetFilters",
+    "POST Create MCR Packet Filter \u2013 /v2/product/mcr2/{productUid}/packetFilter",
+    "PUT Update MCR Packet Filter \u2013 /v2/product/mcr2/{productUid}/packetFilter/{packetFilterId}",
+    "DEL Delete MCR Packet Filter \u2013 /v2/product/mcr2/{productUid}/packetFilter/{packetFilterId}",
+    "GET /v2/product/{uid}",
+    "GET /v2/products",
+    "POST /v3/networkdesign/validate",
+    "POST /v3/networkdesign/buy",
+    "Get MVE Price: GET /v2/pricebook/mve",
+    "Get VXC Price: GET /v2/pricebook/vxc",
+    "Validate Orders: POST /v2/networkdesign/validate",
+    "Buy Services: POST /v2/networkdesign/buy",
+    "Update VXC Details: PUT /v2/product/vxc/{productUid}",
+    "Delete Services: POST /v2/product/{productUid}/action/{action}",
+    "GET /v3/company/${companyUid}/invoice/supplierId/{supplierId}?fromDate=${fromDate}&amp;toDate=${toDate}",
+    "GET /v3/company/${companyUid}/invoice/${invoiceId}",
+    "GET /v3/company/${companyUid}/invoice/${invoiceId}/pdf",
+    "GET /v3/company/${companyUid}/invoice/${invoiceId}/csv",
+    "/v2/networkdesign/validate",
+    "/v3/networkdesign/validate",
+    "/v2/networkdesign/buy",
+    "/v3/networkdesign/buy",
+    "POST /v3/networkdesign/validate",
+    "POST /v3/networkdesign/buy",
+    "PUT /v3/product/vxc/{productUid}",
+    "Acceptable values for \u201cterm\u201d are: 1, 12, 24, 36. If \u201cterm\u201d is not provided when validating and ordering a VXC, it defaults to 1 (No Minimum Term). If \u201cterm\u201d is not provided when updating a VXC, the existing value is not updated.",
+    "You can now specify a time span in 'days in the past' instead of needing exact dates.",
+    "From time to time we update, change versions, and deprecate APIs when releasing new functionality."
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "metro": "Singapore",
+  "expectedLocationNames": [
+    "Equinix Singapore SG1",
+    "Equinix Singapore SG2",
+    "Equinix Singapore SG3",
+    "Equinix Singapore SG4",
+    "Global Switch Singapore",
+    "Digital Realty Singapore SIN10",
+    "Digital Realty Singapore SIN12",
+    "Racks Central Singapore",
+    "NTT Singapore",
+    "STT Singapore 5",
+    "SGX Singapore"
+  ],
+  "description": "Expected location names when filtering by Singapore metro. This list should be updated when new locations are added or removed."
+}

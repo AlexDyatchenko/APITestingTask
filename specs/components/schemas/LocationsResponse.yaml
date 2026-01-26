@@ -1,0 +1,14 @@
+type: object
+properties:
+  message:
+    type: string
+  terms:
+    type: string
+  data:
+    type: array
+    items:
+      $ref: './Location.yaml'
+required:
+  - message
+  - terms
+  - data

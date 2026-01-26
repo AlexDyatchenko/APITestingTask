@@ -1,20 +1,19 @@
-import { test, expect } from "@playwright/test";
+import { test } from "@playwright/test";
+import { expect } from "../../utils/test-extensions";
 import Ajv, { type Options as AjvOptions } from "ajv";
 import addFormats from "ajv-formats";
-import { LocationsAPI } from "../../modules/locations/locations.api";
 import { PayloadBuilder } from "../../modules/data/payload-builder";
 import { Api } from "../../utils/api";
 import { APIClient } from "../../utils/api-client";
 import {
     API_ENDPOINTS,
     HTTP_STATUS,
-    CONTENT_TYPES,
     LOCATION_STATUSES,
     MVE_VENDORS,
     PERFORMANCE_THRESHOLDS,
-    ERROR_MESSAGES,
 } from "../../utils/constants";
 import locationsSchema from "../../fixtures/mocks/locations-schema.json";
+import expectedSingaporeLocations from "../../fixtures/expected-locations/singapore-metro.json";
 
 /**
  * Comprehensive API Test Suite for /v2/locations endpoint
@@ -40,30 +39,36 @@ import locationsSchema from "../../fixtures/mocks/locations-schema.json";
  * - ISTQB minimal coverage standards
  */
 
-test.describe("/v2/locations API Tests", () => {
+test.describe("/v2/locations API Tests", {
+    tag: ["@ci", "@api"],
+},() => {
     let api: Api;
+    let endpoint: string;
     const ajvOptions: AjvOptions = { allowUnionTypes: true };
     const ajv = new Ajv(ajvOptions);
     addFormats(ajv); // Add format support for date-time, email, etc.
     const validateSchema = ajv.compile(locationsSchema);
 
+    test.beforeAll(() => {
+        endpoint = API_ENDPOINTS.LOCATIONS;
+    });
+
     test.beforeEach(async ({ request }) => {
         const baseURL = test.info().project.use.baseURL || "";
         api = new Api(request, baseURL);
+        api.path(API_ENDPOINTS.LOCATIONS);
     });
 
-    test.describe("Authentication Scenarios",
-        {
-            tag: ["@ci", "@api", "@auth"],
-        },() => {
+    test.describe("Authentication Scenarios", {
+        tag: ["@auth"],
+    }, () => {
         test(
             "should return 200 with a valid Bearer token",
             async () => {
                 // Generate a valid token (in production, this would be from an auth service)
-                const validToken = PayloadBuilder.generateValidToken();
-                const params = PayloadBuilder.generateValidLocationParams();
-
-                await api.setToken(validToken).getRequest(API_ENDPOINTS.LOCATIONS, params);
+                await api
+                    .setToken(PayloadBuilder.generateValidToken())
+                    .getRequest(PayloadBuilder.generateValidLocationParams());
                 const response = api.getResponse();
 
                 // API may return 401 if token validation is strict
@@ -71,7 +76,7 @@ test.describe("/v2/locations API Tests", () => {
                     response.status(),
                 );
 
-                if (response.status() === HTTP_STATUS.OK) {
+                if (api.isOk()) {
                     const body = await api.getBody();
                     expect(body?.message).toBeDefined();
 
@@ -88,43 +93,38 @@ test.describe("/v2/locations API Tests", () => {
         );
 
         test(
-            "should return 401 Unauthorized with missing token",
+            "should return 401 Unauthorized with a missing token",
             {
-                tag: ["@ci", "@api", "@auth", "@negative"],
+                tag: ["@negative"],
             },
             async () => {
-                const params = PayloadBuilder.generateValidLocationParams();
-
-                api = new Api(api['requestContext'], api['baseURL'], -1, false);
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, params);
-                const response = api.getResponse();
+                api = new Api(api.requestContext, api.baseURL, -1, false);
+                await api.getRequest(PayloadBuilder.generateValidLocationParams(), undefined, -1);
 
                 // Depending on API implementation, it might return 200 or 401
                 // Adjust based on your actual API behavior
-                if (response.status() === HTTP_STATUS.UNAUTHORIZED) {
+                if (api.isStatus(HTTP_STATUS.UNAUTHORIZED)) {
                     const body = await api.getBody();
                     expect(body?.error || body?.message).toBeDefined();
                 } else {
                     // If API doesn't require auth, it should still return 200
-                    expect(response.status()).toBe(HTTP_STATUS.OK);
+                    expect(api.isOk()).toBeTruthy();
                 }
             },
         );
 
         test(
-            "should return 401 Unauthorized with invalid token",
+            "should return 401 Unauthorized with an invalid token",
             {
-                tag: ["@ci", "@api", "@auth", "@negative"],
+                tag: ["@negative"],
             },
             async () => {
-                const invalidToken = PayloadBuilder.generateInvalidToken();
-                const params = PayloadBuilder.generateValidLocationParams();
-
-                await api.setToken(invalidToken).getRequest(API_ENDPOINTS.LOCATIONS, params);
-                const response = api.getResponse();
+                await api
+                    .setToken(PayloadBuilder.generateInvalidToken())
+                    .getRequest(PayloadBuilder.generateValidLocationParams());
 
                 // Depending on API implementation
-                if (response.status() === HTTP_STATUS.UNAUTHORIZED) {
+                if (api.isStatus(HTTP_STATUS.UNAUTHORIZED)) {
                     const body = await api.getBody();
                     expect(body?.error || body?.message).toMatch(
                         /unauthorized|invalid|token/i,
@@ -138,18 +138,15 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should validate response against JSON schema",
             {
-                tag: ["@ci", "@api", "@schema"],
+                tag: ["@schema"],
             },
             async () => {
-                const params = {
-                    locationStatus: LOCATION_STATUSES.ACTIVE,
-                    metro: "Singapore",
-                };
-
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, params);
-                const body = await api.getBody();
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
+                const body = await api
+                    .params({
+                        locationStatuses: LOCATION_STATUSES.ACTIVE,
+                        metro: "Singapore",
+                    })
+                    .get();
 
                 // Validate against JSON schema
                 const isValid = validateSchema(body);
@@ -161,14 +158,12 @@ test.describe("/v2/locations API Tests", () => {
         );
 
         test(
-            "should have correct Content-Type header",
+            "it should have the correct Content-Type header",
             {
-                tag: ["@ci", "@api", "@headers"],
+                tag: ["@headers"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { locationStatus: LOCATION_STATUSES.ACTIVE });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
+                await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE });
 
                 const contentType = api.getResponse().headers()["content-type"];
                 expect(contentType).toContain("application/json");
@@ -177,31 +172,24 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should validate status codes for success",
-            {
-                tag: ["@ci", "@api"],
-            },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { locationStatus: LOCATION_STATUSES.ACTIVE });
+                await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE });
 
-                expect(api.status()).toBe(HTTP_STATUS.OK);
                 expect(api.getResponse().ok()).toBeTruthy();
             },
         );
     });
 
-    test.describe("Functional Test Cases - Success Path", () => {
+    test.describe("Functional Test Cases - Success Path", {
+        tag: ["@functional"],
+    }, () => {
         test(
             "should successfully retrieve locations with valid parameters",
             {
-                tag: ["@ci", "@api", "@smoke"],
+                tag: ["@smoke"],
             },
             async () => {
-                const params = PayloadBuilder.generateValidLocationParams();
-
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, params);
-                const body = await api.getBody();
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
+                const body = await api.getRequest(PayloadBuilder.generateValidLocationParams()).then(() => api.getBody());
 
                 expect(body?.message).toContain("List all public locations");
 
@@ -211,8 +199,7 @@ test.describe("/v2/locations API Tests", () => {
                 expect(body.terms).toContain("Acceptable Use Policy");
 
                 // Validate data array exists and has proper structure
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                expect(body).toHaveDataArray();
                 expect(body.data.length).toBeGreaterThanOrEqual(0);
 
                 // If data exists, validate first location structure
@@ -236,48 +223,71 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should filter locations by status",
-            {
-                tag: ["@ci", "@api", "@functional"],
-            },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { locationStatuses: LOCATION_STATUSES.ACTIVE });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE }).then(() => api.getBody());
 
                 // Validate data is returned
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                expect(body).toHaveDataArray();
 
-                // Note: API may not strictly filter by status
-                // Verify response contains data (filtering capability exists)
+                // Verify all returned locations have the Active status
                 if (body.data.length > 0) {
-                    // At least verify the status field exists
-                    expect(body.data[0]).toHaveProperty("status");
+                    body.data.forEach((location: any) => {
+                        expect(location.status).toBe(LOCATION_STATUSES.ACTIVE);
+                    });
                 }
             },
         );
 
         test(
-            "should filter locations by metro",
-            {
-                tag: ["@ci", "@api", "@functional"],
-            },
+            "should filter locations by metro - Singapore",
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { metro: "Singapore" });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api
+                    .params({ metro: "Singapore" })
+                    .get();
 
                 // Validate data is returned
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                expect(body).toHaveDataArray();
+                expect(body.data.length).toBeGreaterThan(0);
 
                 // All locations should be in Singapore metro
+                body.data.forEach((location: any) => {
+                    expect(location.metro).toBe("Singapore");
+                });
+
+                // Verify we got the expected locations
+                const actualLocationNames = body.data.map((loc: any) => loc.name).sort();
+                const expectedNames = [...expectedSingaporeLocations.expectedLocationNames].sort();
+
+                // Check that all expected locations are present
+                expectedNames.forEach((expectedName: string) => {
+                    expect(actualLocationNames).toContain(expectedName);
+                });
+
+                // Optional: Log if there are additional locations not in expected list
+                const unexpectedLocations = actualLocationNames.filter(
+                    (name: string) => !expectedNames.includes(name)
+                );
+                if (unexpectedLocations.length > 0) {
+                    console.log(`Note: Found ${unexpectedLocations.length} additional Singapore locations not in expected list:`, unexpectedLocations);
+                }
+            },
+        );
+
+        test(
+            "should handle multiple filter parameters",
+            async () => {
+                const body = await api.getRequest({
+                    locationStatuses: LOCATION_STATUSES.ACTIVE,
+                    metro: "Singapore",
+                }).then(() => api.getBody());
+
+                expect(body?.message).toBeDefined();
+                expect(body).toHaveDataArray();
+
+                // All locations should match both filters
                 if (body.data.length > 0) {
                     body.data.forEach((location: any) => {
+                        expect(location.status).toBe(LOCATION_STATUSES.ACTIVE);
                         expect(location.metro).toBe("Singapore");
                     });
                 }
@@ -285,52 +295,24 @@ test.describe("/v2/locations API Tests", () => {
         );
 
         test(
-            "should handle multiple filter parameters",
-            {
-                tag: ["@ci", "@api", "@functional"],
-            },
-            async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, {
-                    locationStatus: LOCATION_STATUSES.ACTIVE,
-                    metro: "Singapore",
-                });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body?.message).toBeDefined();
-            },
-        );
-
-        test(
             "should filter by marketEnabled parameter",
             {
-                tag: ["@ci", "@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { marketEnabled: true });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                const body = await api.getRequest({ marketEnabled: true }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
             },
         );
 
         test(
             "should filter by mveVendor parameter - Aruba",
             {
-                tag: ["@ci", "@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { mveVendor: MVE_VENDORS.ARUBA });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
 
                 // If MVE data exists, validate sizes array
                 if (body.data.length > 0 && body.data[0].mve) {
@@ -342,50 +324,45 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should filter by mveVendor parameter - Cisco",
             {
-                tag: ["@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { mveVendor: MVE_VENDORS.CISCO });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
+                const body = await api.getRequest({ mveVendor: MVE_VENDORS.CISCO }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
             },
         );
 
         test(
-            "should handle multiple locationStatus values",
+            "should handle multiple locationStatuses values",
             {
-                tag: ["@ci", "@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                // API supports multiple status values as per spec
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, {
-                    locationStatus: [
+                // API supports multiple status values as per spec - using locationStatuses parameter multiple times
+                const body = await api.getRequest({
+                    locationStatuses: [
                         LOCATION_STATUSES.ACTIVE,
                         LOCATION_STATUSES.DEPLOYMENT,
                     ],
-                });
+                }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
 
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
-                expect(Array.isArray(body.data)).toBeTruthy();
+                // Verify returned locations have one of the requested statuses
+                if (body.data.length > 0) {
+                    body.data.forEach((location: any) => {
+                        expect([LOCATION_STATUSES.ACTIVE, LOCATION_STATUSES.DEPLOYMENT]).toContain(location.status);
+                    });
+                }
             },
         );
 
         test(
             "should validate diversityZones object in response",
             {
-                tag: ["@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { locationStatus: LOCATION_STATUSES.ACTIVE });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE }).then(() => api.getBody());
 
                 if (body.data.length > 0) {
                     const locationWithDiversity = body.data.find(
@@ -421,14 +398,10 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should validate MVE sizes and details in response",
             {
-                tag: ["@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { mveVendor: MVE_VENDORS.ARUBA });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
 
                 if (body.data.length > 0) {
                     const locationWithMve = body.data.find((loc: any) => loc.mve);
@@ -462,17 +435,13 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should validate latitude and longitude fields",
             {
-                tag: ["@api", "@functional", "@istqb"],
+                tag: ["@istqb"],
             },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, {
-                    locationStatus: LOCATION_STATUSES.ACTIVE,
+                const body = await api.getRequest({
+                    locationStatuses: LOCATION_STATUSES.ACTIVE,
                     metro: "Singapore",
-                });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                }).then(() => api.getBody());
 
                 if (body.data.length > 0) {
                     const location = body.data[0];
@@ -495,7 +464,9 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    test.describe("Equivalence Partitioning - locationStatus", () => {
+    test.describe("Equivalence Partitioning - locationStatus", {
+        tag: ["@istqb", "@equivalence"],
+    }, () => {
         // Test each valid status value (valid equivalence classes)
         const validStatuses = [
             LOCATION_STATUSES.ACTIVE,
@@ -508,28 +479,28 @@ test.describe("/v2/locations API Tests", () => {
 
         validStatuses.forEach((status) => {
             test(
-                `should accept valid locationStatus: ${status}`,
-                {
-                    tag: ["@ci", "@api", "@istqb", "@equivalence"],
-                },
-                async () => {
-                    await api.getRequest(API_ENDPOINTS.LOCATIONS, { locationStatus: status });
+                `should accept valid locationStatuses: ${status}`,
+                for (const status of statuses) {
+                    const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
+                    expect(body).toHaveDataArray();
 
-                    expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                    const body = await api.getBody();
-                    expect(body).toHaveProperty("data");
+                    if (body.data.length > 0) {
+                    if (body.data.length > 0) {
+                        body.data.forEach((location: any) => {
+                            expect(location.status).toBe(status);
+                        });
+                    }
                 },
             );
         });
 
         test(
-            "should handle invalid locationStatus value",
+            "should handle invalid locationStatuses value",
             {
-                tag: ["@api", "@negative", "@istqb", "@equivalence"],
+                tag: ["@negative"],
             },
             async () => {
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, { locationStatus: "InvalidStatus123" });
+                await api.getRequest({ locationStatuses: "InvalidStatus123" }, undefined, -1);
 
                 // API may return 200 with empty data or 400 Bad Request
                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
@@ -539,7 +510,9 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    test.describe("Equivalence Partitioning - mveVendor", () => {
+    test.describe("Equivalence Partitioning - mveVendor", {
+        tag: ["@istqb", "@equivalence"],
+    }, () => {
         // Test each valid vendor (valid equivalence classes)
         const validVendors = [
             MVE_VENDORS.ARUBA,
@@ -553,16 +526,9 @@ test.describe("/v2/locations API Tests", () => {
         validVendors.forEach((vendor) => {
             test(
                 `should accept valid mveVendor: ${vendor}`,
-                {
-                    tag: ["@api", "@istqb", "@equivalence"],
-                },
                 async () => {
-                    await api.getRequest(API_ENDPOINTS.LOCATIONS, { mveVendor: vendor });
-
-                    expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                    const body = await api.getBody();
-                    expect(body).toHaveProperty("data");
+                    const body = await api.getRequest({ mveVendor: vendor }).then(() => api.getBody());
+                    expect(body).toHaveDataArray();
                 },
             );
         });
@@ -570,10 +536,10 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should handle invalid mveVendor value",
             {
-                tag: ["@api", "@negative", "@istqb", "@equivalence"],
+                tag: ["@negative"],
             },
             async () => {
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, { mveVendor: "InvalidVendor999" });
+                await api.getRequest({ mveVendor: "InvalidVendor999" }, undefined, -1);
 
                 // API may return 200 with empty data or 400 Bad Request
                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
@@ -583,44 +549,32 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    test.describe("Equivalence Partitioning - marketEnabled", () => {
+    test.describe("Equivalence Partitioning - marketEnabled", {
+        tag: ["@istqb", "@equivalence"],
+    }, () => {
         test(
             "should accept marketEnabled as true",
-            {
-                tag: ["@ci", "@api", "@istqb", "@equivalence"],
-            },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { marketEnabled: true });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
+                const body = await api.getRequest({ marketEnabled: true }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
             },
         );
 
         test(
             "should accept marketEnabled as false (default)",
-            {
-                tag: ["@ci", "@api", "@istqb", "@equivalence"],
-            },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, { marketEnabled: false });
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
-                expect(body).toHaveProperty("data");
+                const body = await api.getRequest({ marketEnabled: false }).then(() => api.getBody());
+                expect(body).toHaveDataArray();
             },
         );
 
         test(
             "should handle invalid marketEnabled value",
             {
-                tag: ["@api", "@negative", "@istqb", "@equivalence"],
+                tag: ["@negative"],
             },
             async () => {
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, { marketEnabled: "not_a_boolean" as any });
+                await api.getRequest({ marketEnabled: "not_a_boolean" as any }, undefined, -1);
 
                 // API may return 400 or coerce to boolean
                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
@@ -630,33 +584,21 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    test.describe("Boundary Testing", () => {
+    test.describe("Boundary Testing", {
+        tag: ["@boundary"],
+    }, () => {
         test(
             "should handle minimum boundary values",
-            {
-                tag: ["@ci", "@api", "@boundary"],
-            },
             async () => {
-                const params = PayloadBuilder.generateMinBoundaryParams();
-
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, params);
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api.getRequest(PayloadBuilder.generateMinBoundaryParams()).then(() => api.getBody());
                 expect(body).toBeDefined();
             },
         );
 
         test(
             "should handle maximum boundary values",
-            {
-                tag: ["@ci", "@api", "@boundary"],
-            },
             async () => {
-                const params = PayloadBuilder.generateMaxBoundaryParams();
-
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, params);
+                await api.getRequest(PayloadBuilder.generateMaxBoundaryParams(), undefined, -1);
 
                 // API should handle large values gracefully (200 or 400)
                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
@@ -667,30 +609,20 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should handle empty parameters",
-            {
-                tag: ["@ci", "@api", "@boundary"],
-            },
             async () => {
-                await api.getRequest(API_ENDPOINTS.LOCATIONS);
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
-
-                const body = await api.getBody();
+                const body = await api.getRequest().then(() => api.getBody());
                 expect(body?.message).toBeDefined();
             },
         );
     });
 
-    test.describe("Error Handling", () => {
+    test.describe("Error Handling", {
+        tag: ["@negative"],
+    }, () => {
         test(
             "should return 400 Bad Request for invalid parameters",
-            {
-                tag: ["@ci", "@api", "@negative"],
-            },
             async () => {
-                const invalidParams = PayloadBuilder.generateInvalidParams();
-
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, invalidParams);
+                await api.getRequest(PayloadBuilder.generateInvalidParams(), undefined, -1);
 
                 // API might return 400 or process with default values (200)
                 // Adjust based on your API's error handling
@@ -703,15 +635,12 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should handle invalid Accept header gracefully",
-            {
-                tag: ["@ci", "@api", "@negative"],
-            },
             async () => {
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, {
-                    locationStatus: LOCATION_STATUSES.ACTIVE,
+                await api.getRequest({
+                    locationStatuses: LOCATION_STATUSES.ACTIVE,
                 }, {
                     Accept: "application/xml",
-                });
+                }, -1);
 
                 // API should either return JSON anyway or 406 Not Acceptable
                 expect([HTTP_STATUS.OK, 406]).toContain(api.status());
@@ -720,31 +649,23 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should return appropriate error for non-existent endpoint",
-            {
-                tag: ["@ci", "@api", "@negative"],
-            },
             async () => {
-                await api.setExpectedStatus(-1).getRequest("/v2/locations/nonexistent123456");
+                await api.path("/v2/locations/nonexistent123456").getRequest(null, null, -1);
 
                 expect(api.status()).toBe(HTTP_STATUS.UNAUTHORIZED);
             },
         );
     });
 
-    test.describe("Performance Testing", () => {
+    test.describe("Performance Testing", {
+        tag: ["@performance"],
+    }, () => {
         test(
             "should respond within acceptable time threshold",
-            {
-                tag: ["@ci", "@api", "@performance"],
-            },
             async () => {
-                const params = PayloadBuilder.generateValidLocationParams();
-
                 const startTime = Date.now();
-                await api.getRequest(API_ENDPOINTS.LOCATIONS, params);
+                await api.getRequest(PayloadBuilder.generateValidLocationParams());
                 const duration = Date.now() - startTime;
-
-                expect(api.status()).toBe(HTTP_STATUS.OK);
                 expect(duration).toBeLessThan(
                     PERFORMANCE_THRESHOLDS.API_RESPONSE_TIME + 100,
                 );
@@ -756,16 +677,14 @@ test.describe("/v2/locations API Tests", () => {
         test(
             "should handle concurrent requests efficiently",
             {
-                tag: ["@api", "@performance", "@load"],
+                tag: ["@load"],
             },
             async ({ request }) => {
-                const params = PayloadBuilder.generateValidLocationParams();
                 const concurrentRequests = 10;
-
                 const startTime = Date.now();
 
                 const promises = Array.from({ length: concurrentRequests }, () =>
-                    new Api(request, api['baseURL']).getRequest(API_ENDPOINTS.LOCATIONS, params)
+                    new Api(request, api.baseURL).getRequest(PayloadBuilder.generateValidLocationParams())
                 );
 
                 const results = await Promise.all(promises);
@@ -773,7 +692,7 @@ test.describe("/v2/locations API Tests", () => {
 
                 // All requests should succeed
                 results.forEach((res) => {
-                    expect(res.status()).toBe(HTTP_STATUS.OK);
+                    expect(res.isOk()).toBeTruthy();
                 });
 
                 // console.log(
@@ -789,19 +708,18 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    test.describe("Dynamic Data Testing", () => {
+    test.describe("Dynamic Data Testing", {
+        tag: ["@dynamic"],
+    }, () => {
         test(
             "should handle dynamically generated query parameters",
-            {
-                tag: ["@api", "@dynamic"],
-            },
             async () => {
                 // Generate unique test data for each run
                 const dynamicParams = PayloadBuilder.generateLocationQueryParams({
                     locationStatus: LOCATION_STATUSES.ACTIVE,
                 });
 
-                await api.setExpectedStatus(-1).getRequest(API_ENDPOINTS.LOCATIONS, dynamicParams);
+                await api.getRequest(dynamicParams, undefined, -1);
 
                 // Should handle various parameter combinations
                 expect([HTTP_STATUS.OK, HTTP_STATUS.BAD_REQUEST]).toContain(
@@ -815,9 +733,6 @@ test.describe("/v2/locations API Tests", () => {
 
         test(
             "should generate unique test data on each run",
-            {
-                tag: ["@api", "@dynamic"],
-            },
             async () => {
                 const params1 = PayloadBuilder.generateLocationQueryParams();
                 const params2 = PayloadBuilder.generateLocationQueryParams();
@@ -833,25 +748,58 @@ test.describe("/v2/locations API Tests", () => {
         );
     });
 
-    // Keep original test for backwards compatibility
+    test.describe("Additional Metro Filter Tests", () => {
+        test(
+            "should validate metro filter with different metro - London",
+            {
+                tag: ["@functional"],
+            },
+            async () => {
+                const body = await api
+                    .params({ metro: "London" })
+                    .get();
+
+                expect(body).toHaveDataArray();
+
+                // All locations should be in the London metro
+                if (body.data.length > 0) {
+                    body.data.forEach((location: any) => {
+                        expect(location.metro).toBe("London");
+                    });
+                }
+            },
+        );
+
+        test(
+            "should return empty or filtered results for non-existent metro",
+            {
+                tag: ["@negative"],
+            },
+            async () => {
+                const body = await api
+                    .params({ metro: "NonExistentMetro123" })
+                    .get();
+
+                expect(body).toHaveDataArray();
+                // Should return an empty array or handle gracefully
+                expect(body.data.length).toBe(0);
+            },
+        );
+    });
+
+    // Keep the original test for backwards compatibility
     test(
         "Original: /v2/locations basic test",
         {
-            tag: ["@ci", "@api", "@legacy"],
+            tag: ["@legacy"],
         },
         async () => {
-            const url = "/v2/locations";
-
-            await api.getRequest(url, {
+            const body = await api.getRequest({
                 locationStatuses: "Active",
                 metro: "Singapore",
             }, {
                 Accept: "*/*",
-            });
-
-            expect(api.status()).toBe(200);
-
-            const body = await api.getBody();
+            }).then(() => api.getBody());
             expect(body?.message).toContain("List all public locations");
         },
     );

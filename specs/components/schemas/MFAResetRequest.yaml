@@ -1,0 +1,21 @@
+type: object
+description: Request body for resetting Multi-Factor Authentication
+properties:
+  totpSecret:
+    type: string
+    description: |
+      A secret returned by calling the /v2/totp/qrcode endpoint. 
+      It has a length of 16 characters and contains only capital letters and digits.
+    pattern: "^[A-Z0-9]{16}$"
+    example: "G4C3S6MBH2HSF2EV"
+  totpCode:
+    type: string
+    description: |
+      A 6-digit number generated based on totpSecret. 
+      The user can scan the QR code with apps like Google Authenticator 
+      and that app will generate the code for the user.
+    pattern: '^\d{6}$'
+    example: "123456"
+required:
+  - totpSecret
+  - totpCode

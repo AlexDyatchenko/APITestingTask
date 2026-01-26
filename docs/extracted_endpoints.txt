@@ -1,0 +1,8 @@
+Total unique endpoints found: 0
+
+Endpoints by method:
+
+================================================================================
+
+All endpoints:
+

@@ -1,0 +1,29 @@
+type: object
+description: Login request with username and password
+properties:
+  username:
+    type: string
+    format: email
+    description: User's username (email address) for login
+    example: "megaport.newuser@abcd.com"
+  password:
+    type: string
+    format: password
+    description: User's plain text password (Required if encodedPassword is not provided)
+    example: "Dfjhgedcifk@!23"
+  encodedPassword:
+    type: string
+    description: Base64 encoded password (Required if password is not provided)
+    example: "RGZqaGdlZGNpZmtAITIz"
+  oneTimePassword:
+    type: string
+    description: Multi-factor authentication code (required if MFA is enabled)
+    pattern: '^\d{6}$'
+    example: "123456"
+required:
+  - username
+oneOf:
+  - required:
+      - password
+  - required:
+      - encodedPassword
