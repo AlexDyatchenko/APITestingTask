@@ -1,0 +1,27 @@
+/v2/company/${companyId}/invoice/${invoiceId}/pdf:
+  get:
+    summary: Single Invoice PDF (v2)
+    description: Single Invoice PDF (v2)
+    operationId: get_v2_company_invoice_pdf
+    tags:
+    - Version 2 (v2) endpoints - to be deprecated July 2025
+    parameters:
+    - name: companyId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The companyId parameter
+    - name: invoiceId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The invoiceId parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -206,9 +206,7 @@ test.describe("/v2/locations API Tests", {
         }, async () => {});
         test("should filter by status", async () => {});
         test("should filter by metro", async () => {});
-        test("should filter by marketEnabled", {
-            tag: ["@istqb"],
-        }, async () => {});
+        test("should filter by marketEnabled", async () => {});
     });
 
     // EQUIVALENCE PARTITIONING TESTS

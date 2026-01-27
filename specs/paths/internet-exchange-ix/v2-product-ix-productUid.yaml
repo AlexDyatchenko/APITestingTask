@@ -1,0 +1,27 @@
+/v2/product/ix/{productUid}:
+  put:
+    summary: Update IX
+    description: Update IX
+    operationId: put_v2_product_ix
+    tags:
+    - Internet Exchange (IX)
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

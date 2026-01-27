@@ -1,0 +1,21 @@
+/v2/product/{productUid}/action/CANCEL_NOW/charges:
+  get:
+    summary: Cancellation Price (Lifecyle Action Change) (v2)
+    description: Cancellation Price (Lifecyle Action Change) (v2)
+    operationId: get_v2_product_action_CANCEL_NOW_charges
+    tags:
+    - Pricing
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

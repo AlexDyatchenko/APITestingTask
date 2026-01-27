@@ -1,0 +1,15 @@
+/v2/products/telemetry:
+  get:
+    summary: Get Available Metric Types
+    description: Get Available Metric Types
+    operationId: get_v2_products_telemetry
+    tags:
+    - Metric Types
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

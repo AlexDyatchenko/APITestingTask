@@ -1,0 +1,27 @@
+/v2/dropdowns/partner/megaports:
+  get:
+    summary: Look Up Salesforce Location
+    description: Look Up Salesforce Location
+    operationId: get_v2_dropdowns_partner_megaports
+    tags:
+    - Salesforce Express Connect
+    parameters:
+    - name: vxcPermitted
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: connectType
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

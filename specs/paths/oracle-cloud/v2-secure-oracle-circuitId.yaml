@@ -1,0 +1,21 @@
+/v2/secure/oracle/{circuitId}:
+  get:
+    summary: Look Up Oracle Circuit ID
+    description: Look Up Oracle Circuit ID
+    operationId: get_v2_secure_oracle
+    tags:
+    - Oracle Cloud
+    parameters:
+    - name: circuitId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The circuitId parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

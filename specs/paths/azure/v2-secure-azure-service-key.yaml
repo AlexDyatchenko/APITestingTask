@@ -1,0 +1,21 @@
+/v2/secure/azure/{service_key}:
+  get:
+    summary: Look Up Azure Service Key
+    description: Look Up Azure Service Key
+    operationId: get_v2_secure_azure
+    tags:
+    - Azure
+    parameters:
+    - name: service_key
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The service_key parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

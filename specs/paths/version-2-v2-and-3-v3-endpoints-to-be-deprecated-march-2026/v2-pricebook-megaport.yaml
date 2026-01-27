@@ -1,0 +1,45 @@
+/v2/pricebook/megaport:
+  get:
+    summary: Port Price
+    description: Port Price
+    operationId: get_v2_pricebook_megaport
+    tags:
+    - Version 2 (v2) and 3 (v3) endpoints - to be deprecated March 2026
+    parameters:
+    - name: locationId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: speed
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: term
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: buyoutPort
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: productUid
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

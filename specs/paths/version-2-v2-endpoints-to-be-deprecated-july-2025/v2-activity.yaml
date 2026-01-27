@@ -1,0 +1,33 @@
+/v2/activity:
+  get:
+    summary: User Activity
+    description: User Activity
+    operationId: get_v2_activity
+    tags:
+    - Version 2 (v2) endpoints - to be deprecated July 2025
+    parameters:
+    - name: personIdOrUid
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: companyIdOrUid
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: page
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

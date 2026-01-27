@@ -1,0 +1,39 @@
+/v2/product/mcr2/{productUid}/diagnostics/routes/bgp/neighbor:
+  get:
+    summary: List BGP Neighbor Routes
+    description: List BGP Neighbor Routes
+    operationId: get_v2_product_mcr2_diagnostics_routes_bgp_neighbor
+    tags:
+    - MCR Looking Glass
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: direction
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: peer_ip_address
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: async
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

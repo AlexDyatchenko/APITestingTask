@@ -1,0 +1,27 @@
+/oauth2/token:
+  post:
+    summary: Generate Access Token - Production
+    description: Generate Access Token - Production
+    operationId: post_oauth2_token
+    tags:
+    - Megaport Authentication - API Keys
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              grant_type:
+                type: string
+                description: ''
+    security:
+    - basicAuth: []

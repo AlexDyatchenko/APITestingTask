@@ -1,0 +1,47 @@
+/v2/product/{productuid}/tags:
+  get:
+    summary: Get Resource Tags for Product
+    description: Get Resource Tags for Product
+    operationId: get_v2_product_tags
+    tags:
+    - Product Details
+    parameters:
+    - name: productuid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productuid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  put:
+    summary: Update Resource Tags
+    description: Update Resource Tags
+    operationId: put_v2_product_tags
+    tags:
+    - Product Details
+    parameters:
+    - name: productuid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productuid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

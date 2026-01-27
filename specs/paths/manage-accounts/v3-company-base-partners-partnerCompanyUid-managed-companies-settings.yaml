@@ -1,0 +1,15 @@
+/v3/company/base/partners/:partnerCompanyUid/managed_companies_settings:
+  get:
+    summary: List Managed Account Settings
+    description: List Managed Account Settings
+    operationId: get_v3_company_base_partners_partnerCompanyUid_managed_companies_settings
+    tags:
+    - Manage Accounts
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,39 @@
+/v2/company/${companyUid}/invoice/supplierId/{supplierId}:
+  get:
+    summary: Invoices (v2)
+    description: Invoices (v2)
+    operationId: get_v2_company_invoice_supplierId
+    tags:
+    - Version 2 (v2) endpoints - to be deprecated July 2025
+    parameters:
+    - name: companyUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The companyUid parameter
+    - name: supplierId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The supplierId parameter
+    - name: fromDate
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: toDate
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

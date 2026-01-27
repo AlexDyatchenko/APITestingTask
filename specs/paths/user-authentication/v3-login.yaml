@@ -1,0 +1,44 @@
+/v3/login:
+  post:
+    summary: Log in With Username and Password (v3)
+    description: Log in With Username and Password (v3)
+    operationId: post_v3_login
+    tags:
+    - User Authentication
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            properties:
+              username:
+                type: string
+                description: '<p>(Required) User''s username (email) that will be
+                  used to log in. Users can also use email to log in.</p>
+
+                  '
+              password:
+                type: string
+                description: '<p>(Required) User''s password (Require password or
+                  encodedPassword)</p>
+
+                  '
+              encodedPassword:
+                type: string
+                description: '<p>Base64 encoded password (Require password or encodedPassword)</p>
+
+                  '
+              oneTimePassword:
+                type: string
+                description: '<p>Multi-factor authentication code</p>
+
+                  '

@@ -1,0 +1,15 @@
+/v3/activityNames:
+  get:
+    summary: User Activity Names
+    description: User Activity Names
+    operationId: get_v3_activityNames
+    tags:
+    - Activity Logs
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,33 @@
+/v3/product/{productUid}/action/{action}:
+  post:
+    summary: Update Product Lifecycle Action (v3)
+    description: Update Product Lifecycle Action (v3)
+    operationId: post_v3_product_action
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: action
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The action parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

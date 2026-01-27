@@ -1,0 +1,21 @@
+/v2/logout:
+  get:
+    summary: Log Out Session
+    description: Log Out Session
+    operationId: get_v2_logout
+    tags:
+    - User Authentication
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

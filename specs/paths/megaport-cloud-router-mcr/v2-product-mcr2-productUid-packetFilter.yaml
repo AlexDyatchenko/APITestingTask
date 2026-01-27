@@ -1,0 +1,27 @@
+/v2/product/mcr2/{productUid}/packetFilter:
+  post:
+    summary: Create MCR Packet Filter List
+    description: Create MCR Packet Filter List
+    operationId: post_v2_product_mcr2_packetFilter
+    tags:
+    - Megaport Cloud Router (MCR)
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

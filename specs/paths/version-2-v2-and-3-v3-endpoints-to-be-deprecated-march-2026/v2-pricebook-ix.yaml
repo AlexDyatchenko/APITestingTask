@@ -1,0 +1,21 @@
+/v2/pricebook/ix:
+  get:
+    summary: IX Price
+    description: IX Price
+    operationId: get_v2_pricebook_ix
+    tags:
+    - Version 2 (v2) and 3 (v3) endpoints - to be deprecated March 2026
+    parameters:
+    - name: ixType
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

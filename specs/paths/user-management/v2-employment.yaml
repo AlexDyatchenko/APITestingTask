@@ -1,0 +1,35 @@
+/v2/employment:
+  post:
+    summary: Invite (Add) a New User to an Existing Company
+    description: Invite (Add) a New User to an Existing Company
+    operationId: post_v2_employment
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  get:
+    summary: List Company Users
+    description: List Company Users
+    operationId: get_v2_employment
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,15 @@
+/v3/product/mve/variants:
+  get:
+    summary: Available MVE Sizes (v3)
+    description: Available MVE Sizes (v3)
+    operationId: get_v3_product_mve_variants
+    tags:
+    - Megaport Virtual Edge (MVE)
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

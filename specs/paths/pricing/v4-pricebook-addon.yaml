@@ -1,0 +1,21 @@
+/v4/pricebook/addon:
+  post:
+    summary: Get Add-on Price (v4)
+    description: Get Add-on Price (v4)
+    operationId: post_v4_pricebook_addon
+    tags:
+    - Pricing
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

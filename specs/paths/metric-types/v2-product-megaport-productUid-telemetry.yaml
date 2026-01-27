@@ -1,0 +1,45 @@
+/v2/product/megaport/{productUid}/telemetry:
+  get:
+    summary: Get Port Telemetry
+    description: Get Port Telemetry
+    operationId: get_v2_product_megaport_telemetry
+    tags:
+    - Metric Types
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: type
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: from
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: to
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: days
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

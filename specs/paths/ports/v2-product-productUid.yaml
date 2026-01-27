@@ -1,0 +1,47 @@
+/v2/product/{productUid}:
+  put:
+    summary: Update Port Details
+    description: Update Port Details
+    operationId: put_v2_product
+    tags:
+    - Ports
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  get:
+    summary: Get Product Details
+    description: Get Product Details
+    operationId: get_v2_product
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

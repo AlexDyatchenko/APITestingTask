@@ -1,0 +1,15 @@
+/v4/product/mve/images:
+  get:
+    summary: MVE Image Details (v4)
+    description: MVE Image Details (v4)
+    operationId: get_v4_product_mve_images
+    tags:
+    - Megaport Virtual Edge (MVE)
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

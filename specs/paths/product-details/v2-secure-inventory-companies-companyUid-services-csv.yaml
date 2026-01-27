@@ -1,0 +1,21 @@
+/v2/secure/inventory/companies/{companyUid}/services/csv:
+  get:
+    summary: Service Inventory Report
+    description: Service Inventory Report
+    operationId: get_v2_secure_inventory_companies_services_csv
+    tags:
+    - Product Details
+    parameters:
+    - name: companyUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The companyUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

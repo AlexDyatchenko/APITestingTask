@@ -1,0 +1,33 @@
+/v3/pricebook/mve:
+  get:
+    summary: MVE Price - No Megaport Internet (v3)
+    description: MVE Price - No Megaport Internet (v3)
+    operationId: get_v3_pricebook_mve
+    tags:
+    - Version 2 (v2) and 3 (v3) endpoints - to be deprecated March 2026
+    parameters:
+    - name: locationId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: vendor
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: size
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

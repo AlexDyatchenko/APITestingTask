@@ -1,0 +1,15 @@
+/v3/companyActivity:
+  get:
+    summary: Company Activity
+    description: Company Activity
+    operationId: get_v3_companyActivity
+    tags:
+    - Activity Logs
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,21 @@
+/v3/products/mcrs/{productUid}/ipsec:
+  get:
+    summary: Get IPsec Details for MCR
+    description: Get IPsec Details for MCR
+    operationId: get_v3_products_mcrs_ipsec
+    tags:
+    - Megaport Cloud Router (MCR)
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

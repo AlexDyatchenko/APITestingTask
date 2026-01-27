@@ -1,0 +1,33 @@
+/v3/product/{productUid}/addon/{addOnUid}:
+  put:
+    summary: Update IPsec Add-On
+    description: Update IPsec Add-On
+    operationId: put_v3_product_addon
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: addOnUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The addOnUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

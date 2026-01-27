@@ -1,0 +1,15 @@
+/v2/marketplace/providerType:
+  get:
+    summary: Get Marketplace Provider Type
+    description: Get Marketplace Provider Type
+    operationId: get_v2_marketplace_providerType
+    tags:
+    - Megaport Marketplace
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -198,7 +198,7 @@ test.describe("/v2/locations API Tests", {
                 expect(body).toHaveProperty("terms");
                 expect(body.terms).toContain("Acceptable Use Policy");
 
-                // Validate data array exists and has proper structure
+                // Validate data array exists and has a proper structure
                 expect(body).toHaveDataArray();
                 expect(body.data.length).toBeGreaterThanOrEqual(0);
 
@@ -249,7 +249,7 @@ test.describe("/v2/locations API Tests", {
                 expect(body).toHaveDataArray();
                 expect(body.data.length).toBeGreaterThan(0);
 
-                // All locations should be in Singapore metro
+                // All locations should be in the Singapore metro
                 body.data.forEach((location: any) => {
                     expect(location.metro).toBe("Singapore");
                 });
@@ -296,9 +296,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should filter by marketEnabled parameter",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({ marketEnabled: true }).then(() => api.getBody());
                 expect(body).toHaveDataArray();
@@ -307,9 +304,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should filter by mveVendor parameter - Aruba",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
                 expect(body).toHaveDataArray();
@@ -323,9 +317,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should filter by mveVendor parameter - Cisco",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.CISCO }).then(() => api.getBody());
                 expect(body).toHaveDataArray();
@@ -334,9 +325,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should handle multiple locationStatuses values",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 // API supports multiple status values as per spec - using locationStatuses parameter multiple times
                 const body = await api.getRequest({
@@ -358,9 +346,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should validate diversityZones object in response",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({ locationStatuses: LOCATION_STATUSES.ACTIVE }).then(() => api.getBody());
 
@@ -397,9 +382,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should validate MVE sizes and details in response",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({ mveVendor: MVE_VENDORS.ARUBA }).then(() => api.getBody());
 
@@ -415,7 +397,7 @@ test.describe("/v2/locations API Tests", {
                             expect(locationWithMve.mve.sizes).toEqual([]);
                         }
 
-                        // If details exist, validate structure
+                        // If details exist, validate the structure
                         if (locationWithMve.mve.details) {
                             expect(Array.isArray(locationWithMve.mve.details)).toBeTruthy();
 
@@ -434,9 +416,6 @@ test.describe("/v2/locations API Tests", {
 
         test(
             "should validate latitude and longitude fields",
-            {
-                tag: ["@istqb"],
-            },
             async () => {
                 const body = await api.getRequest({
                     locationStatuses: LOCATION_STATUSES.ACTIVE,
@@ -480,11 +459,10 @@ test.describe("/v2/locations API Tests", {
         validStatuses.forEach((status) => {
             test(
                 `should accept valid locationStatuses: ${status}`,
-                for (const status of statuses) {
+                async () => {
                     const body = await api.getRequest({ locationStatuses: status }).then(() => api.getBody());
                     expect(body).toHaveDataArray();
 
-                    if (body.data.length > 0) {
                     if (body.data.length > 0) {
                         body.data.forEach((location: any) => {
                             expect(location.status).toBe(status);

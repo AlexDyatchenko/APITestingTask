@@ -1,0 +1,15 @@
+/v2/employee/:employeeId/mfa/admin:
+  delete:
+    summary: Admin Reset User Multi-Factor Authentication
+    description: Admin Reset User Multi-Factor Authentication
+    operationId: delete_v2_employee_employeeId_mfa_admin
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

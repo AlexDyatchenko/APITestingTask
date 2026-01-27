@@ -1,0 +1,27 @@
+/v3/product/vxc/{productUid}:
+  put:
+    summary: Update VXC for MVE (v3)
+    description: Update VXC for MVE (v3)
+    operationId: put_v3_product_vxc
+    tags:
+    - Megaport Virtual Edge (MVE)
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

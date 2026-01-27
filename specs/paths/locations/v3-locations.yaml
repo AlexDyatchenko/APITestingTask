@@ -1,0 +1,27 @@
+/v3/locations:
+  get:
+    summary: Locations (v3)
+    description: Locations (v3)
+    operationId: get_v3_locations
+    tags:
+    - Locations
+    parameters:
+    - name: locationStatuses
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: metro
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

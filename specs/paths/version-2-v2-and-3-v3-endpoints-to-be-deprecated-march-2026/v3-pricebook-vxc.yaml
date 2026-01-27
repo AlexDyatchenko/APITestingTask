@@ -1,0 +1,33 @@
+/v3/pricebook/vxc:
+  get:
+    summary: Megaport Internet Price (v3)
+    description: Megaport Internet Price (v3)
+    operationId: get_v3_pricebook_vxc
+    tags:
+    - Version 2 (v2) and 3 (v3) endpoints - to be deprecated March 2026
+    parameters:
+    - name: bLocationId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: aLocationId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: connectType
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,21 @@
+/v3/product/:productUid/action/:action:
+  post:
+    summary: Delete Megaport Internet (v3)
+    description: Delete Megaport Internet (v3)
+    operationId: post_v3_product_productUid_action_action
+    tags:
+    - Megaport Virtual Edge (MVE)
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

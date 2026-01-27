@@ -1,0 +1,21 @@
+/v2/secure/google/{pairing_key}:
+  get:
+    summary: Look Up Google Pairing Key
+    description: Look Up Google Pairing Key
+    operationId: get_v2_secure_google
+    tags:
+    - Google Cloud
+    parameters:
+    - name: pairing_key
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The pairing_key parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

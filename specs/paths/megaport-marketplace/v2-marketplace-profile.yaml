@@ -1,0 +1,35 @@
+/v2/marketplace/profile:
+  get:
+    summary: Get Marketplace Profile
+    description: Get Marketplace Profile
+    operationId: get_v2_marketplace_profile
+    tags:
+    - Megaport Marketplace
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  put:
+    summary: Update Marketplace Profile
+    description: Update Marketplace Profile
+    operationId: put_v2_marketplace_profile
+    tags:
+    - Megaport Marketplace
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

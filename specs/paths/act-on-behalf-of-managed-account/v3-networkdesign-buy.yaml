@@ -1,0 +1,21 @@
+/v3/networkdesign/buy:
+  post:
+    summary: Buy Port for Managed Account (v3)
+    description: Buy Port for Managed Account (v3)
+    operationId: post_v3_networkdesign_buy
+    tags:
+    - Act on Behalf of Managed Account
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

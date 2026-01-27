@@ -1,0 +1,27 @@
+/v2/products:
+  get:
+    summary: Get Product List
+    description: Get Product List
+    operationId: get_v2_products
+    tags:
+    - Product Details
+    parameters:
+    - name: provisioningStatus
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: filter
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

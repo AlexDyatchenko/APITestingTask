@@ -1,0 +1,35 @@
+/v2/employee/:employeeId/mfa:
+  put:
+    summary: Reset Person Multi-Factor Authentication
+    description: Reset Person Multi-Factor Authentication
+    operationId: put_v2_employee_employeeId_mfa
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  delete:
+    summary: Disable Person Multi-Factor Authentication
+    description: Disable Person Multi-Factor Authentication
+    operationId: delete_v2_employee_employeeId_mfa
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

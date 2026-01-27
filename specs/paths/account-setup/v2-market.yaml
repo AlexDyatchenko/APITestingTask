@@ -1,0 +1,35 @@
+/v2/market:
+  get:
+    summary: Get Billing Markets
+    description: Get Billing Markets
+    operationId: get_v2_market
+    tags:
+    - Account Setup
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  post:
+    summary: Set Billing Market
+    description: Set Billing Market
+    operationId: post_v2_market
+    tags:
+    - Account Setup
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

@@ -1,0 +1,39 @@
+/v3/company/${companyUid}/invoice/supplierId/{supplierId}:
+  get:
+    summary: Invoices (v3)
+    description: Invoices (v3)
+    operationId: get_v3_company_invoice_supplierId
+    tags:
+    - Invoices
+    parameters:
+    - name: companyUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The companyUid parameter
+    - name: supplierId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The supplierId parameter
+    - name: fromDate
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: toDate
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

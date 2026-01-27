@@ -1,0 +1,21 @@
+/v2/product/{productId}/loa:
+  get:
+    summary: Regenerate LOA for Megaport Service
+    description: Regenerate LOA for Megaport Service
+    operationId: get_v2_product_loa
+    tags:
+    - Ports
+    parameters:
+    - name: productId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productId parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

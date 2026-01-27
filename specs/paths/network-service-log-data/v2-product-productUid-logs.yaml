@@ -1,0 +1,21 @@
+/v2/product/{productUid}/logs:
+  get:
+    summary: View Network Service Log Data
+    description: View Network Service Log Data
+    operationId: get_v2_product_logs
+    tags:
+    - Network Service Log Data
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

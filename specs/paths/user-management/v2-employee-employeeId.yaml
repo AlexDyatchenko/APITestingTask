@@ -1,0 +1,49 @@
+/v2/employee/:employeeId:
+  get:
+    summary: Show User Details
+    description: Show User Details
+    operationId: get_v2_employee_employeeId
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  put:
+    summary: Update User Details
+    description: Update User Details
+    operationId: put_v2_employee_employeeId
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  delete:
+    summary: Delete Invited User
+    description: Delete Invited User
+    operationId: delete_v2_employee_employeeId
+    tags:
+    - User Management
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

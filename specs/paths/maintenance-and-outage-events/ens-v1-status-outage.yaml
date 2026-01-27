@@ -1,0 +1,15 @@
+/ens/v1/status/outage:
+  get:
+    summary: Outage Events
+    description: Outage Events
+    operationId: get_ens_v1_status_outage
+    tags:
+    - Maintenance and Outage Events
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

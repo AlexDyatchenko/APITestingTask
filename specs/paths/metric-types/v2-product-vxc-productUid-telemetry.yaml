@@ -1,0 +1,45 @@
+/v2/product/vxc/{productUid}/telemetry:
+  get:
+    summary: Get Megaport Internet Telemetry
+    description: Get Megaport Internet Telemetry
+    operationId: get_v2_product_vxc_telemetry
+    tags:
+    - Metric Types
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: type
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: from
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: to
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    - name: days
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

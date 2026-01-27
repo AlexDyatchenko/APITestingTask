@@ -1,0 +1,39 @@
+/v2/product/{productUid}/rating/{year}/{month}:
+  get:
+    summary: Speed Change Price (v2)
+    description: Speed Change Price (v2)
+    operationId: get_v2_product_rating
+    tags:
+    - Pricing
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    - name: year
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The year parameter
+    - name: month
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The month parameter
+    - name: newSpeed
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

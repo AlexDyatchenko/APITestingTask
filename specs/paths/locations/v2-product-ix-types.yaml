@@ -1,0 +1,21 @@
+/v2/product/ix/types:
+  get:
+    summary: IX Locations
+    description: IX Locations
+    operationId: get_v2_product_ix_types
+    tags:
+    - Locations
+    parameters:
+    - name: locationId
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

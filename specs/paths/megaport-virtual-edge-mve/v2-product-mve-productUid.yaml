@@ -1,0 +1,27 @@
+/v2/product/mve/{productUid}:
+  put:
+    summary: Modify MVE Details
+    description: Modify MVE Details
+    operationId: put_v2_product_mve
+    tags:
+    - Megaport Virtual Edge (MVE)
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

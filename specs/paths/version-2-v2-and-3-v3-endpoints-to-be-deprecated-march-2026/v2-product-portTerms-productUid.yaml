@@ -1,0 +1,21 @@
+/v2/product/portTerms/{productUid}:
+  get:
+    summary: Contract Term Details
+    description: Contract Term Details
+    operationId: get_v2_product_portTerms
+    tags:
+    - Version 2 (v2) and 3 (v3) endpoints - to be deprecated March 2026
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

@@ -1,0 +1,27 @@
+/v3/product/{productUid}/addon:
+  post:
+    summary: Add Add-on to Existing Product
+    description: Add Add-on to Existing Product
+    operationId: post_v3_product_addon
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

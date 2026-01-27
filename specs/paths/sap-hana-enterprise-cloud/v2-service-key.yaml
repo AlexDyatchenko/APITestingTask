@@ -1,0 +1,61 @@
+/v2/service/key:
+  get:
+    summary: Look Up SAP Service Key
+    description: Look Up SAP Service Key
+    operationId: get_v2_service_key
+    tags:
+    - SAP HANA Enterprise Cloud
+    parameters:
+    - name: key
+      in: query
+      required: false
+      schema:
+        type: string
+      description: ''
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  post:
+    summary: Generate Service Key
+    description: Generate Service Key
+    operationId: post_v2_service_key
+    tags:
+    - Service Keys
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+  put:
+    summary: Update Service Key
+    description: Update Service Key
+    operationId: put_v2_service_key
+    tags:
+    - Service Keys
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

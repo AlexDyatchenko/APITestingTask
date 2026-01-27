@@ -1,0 +1,35 @@
+/v3/notificationPreferences:
+  get:
+    summary: List Notification Settings
+    description: List Notification Settings
+    operationId: get_v3_notificationPreferences
+    tags:
+    - Email Notifications
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  put:
+    summary: Change Notification Settings
+    description: Change Notification Settings
+    operationId: put_v3_notificationPreferences
+    tags:
+    - Email Notifications
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

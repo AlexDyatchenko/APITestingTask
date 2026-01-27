@@ -1,0 +1,41 @@
+/v2/product/{productUid}/lock:
+  post:
+    summary: Lock Product
+    description: Lock Product
+    operationId: post_v2_product_lock
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  delete:
+    summary: Unlock Product
+    description: Unlock Product
+    operationId: delete_v2_product_lock
+    tags:
+    - Product Details
+    parameters:
+    - name: productUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The productUid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

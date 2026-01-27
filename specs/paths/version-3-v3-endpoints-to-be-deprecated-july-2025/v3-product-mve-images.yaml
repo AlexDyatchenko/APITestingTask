@@ -1,0 +1,15 @@
+/v3/product/mve/images:
+  get:
+    summary: MVE Image Details (v3)
+    description: MVE Image Details (v3)
+    operationId: get_v3_product_mve_images
+    tags:
+    - Version 3 (v3) endpoints - to be deprecated July 2025
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

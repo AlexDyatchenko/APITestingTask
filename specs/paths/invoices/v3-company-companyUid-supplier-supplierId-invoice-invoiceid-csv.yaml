@@ -1,0 +1,33 @@
+/v3/company/{companyUid}/supplier/{supplierId}/invoice/{invoiceid}/csv:
+  get:
+    summary: Single Invoice CSV (v3)
+    description: Single Invoice CSV (v3)
+    operationId: get_v3_company_supplier_invoice_csv
+    tags:
+    - Invoices
+    parameters:
+    - name: companyUid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The companyUid parameter
+    - name: supplierId
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The supplierId parameter
+    - name: invoiceid
+      in: path
+      required: true
+      schema:
+        type: string
+      description: The invoiceid parameter
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object

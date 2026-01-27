@@ -1,0 +1,35 @@
+/v2/managedCompanies:
+  get:
+    summary: List Managed Accounts
+    description: List Managed Accounts
+    operationId: get_v2_managedCompanies
+    tags:
+    - Manage Accounts
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+  post:
+    summary: Create a Managed Account
+    description: Create a Managed Account
+    operationId: post_v2_managedCompanies
+    tags:
+    - Manage Accounts
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object

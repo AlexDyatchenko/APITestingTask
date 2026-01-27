@@ -1,0 +1,15 @@
+/v2/secure/awshc:
+  get:
+    summary: Look Up AWS Hosted Connection Port Details
+    description: Look Up AWS Hosted Connection Port Details
+    operationId: get_v2_secure_awshc
+    tags:
+    - AWS
+    parameters: []
+    responses:
+      '200':
+        description: Successful response
+        content:
+          application/json:
+            schema:
+              type: object
