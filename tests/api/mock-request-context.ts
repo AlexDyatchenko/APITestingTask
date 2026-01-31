@@ -1,4 +1,4 @@
-import { APIRequestContext, APIResponse } from "@playwright/test";
+import { APIResponse } from "@playwright/test";
 import singaporeLocations from "../../fixtures/expected-locations/singapore-metro.json";
 
 export class MockAPIRequestContext {
@@ -16,6 +16,21 @@ export class MockAPIRequestContext {
         // Handling non-existent endpoint
         if (url.includes("nonexistent")) {
              return this.createResponse(401, { error: "Unauthorized", message: "Endpoint not found or unauthorized" });
+        }
+
+        // Employee Mock
+        if (url.includes("/v2/employee")) {
+            return this.createResponse(200, {
+                data: {
+                    id: 123,
+                    username: "testuser",
+                    email: "test@example.com",
+                    firstName: "Test",
+                    lastName: "User",
+                    invitationPending: false 
+                },
+                message: "Employee Details"
+            });
         }
 
         const params = options.params || {};
@@ -69,11 +84,13 @@ export class MockAPIRequestContext {
             status: () => status,
             statusText: () => status === 200 ? "OK" : "Error",
             headers: () => ({ "content-type": "application/json" }),
+            headersArray: () => [{ name: "content-type", value: "application/json" }],
+            url: () => "http://localhost/mock-endpoint",
             json: async () => body,
             text: async () => JSON.stringify(body),
             body: async () => Buffer.from(JSON.stringify(body)),
             dispose: async () => {},
-        } as APIResponse;
+        } as unknown as APIResponse;
     }
 
     private generateData() {

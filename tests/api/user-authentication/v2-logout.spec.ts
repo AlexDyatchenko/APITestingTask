@@ -1,0 +1,14 @@
+import { createApiTest } from "../../../utils/api-test-factory";
+
+createApiTest({
+  endpoint: "/v2/logout",
+  method: "GET",
+  title: "Log Out Session",
+  // schema: require("./path/to/schema"), 
+  validParams: { 
+    // TODO: Add required query params
+  },
+  validBody: {
+    // TODO: Add required body params
+  }
+});
