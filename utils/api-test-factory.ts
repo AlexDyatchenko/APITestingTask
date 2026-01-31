@@ -5,7 +5,7 @@ import addFormats from "ajv-formats";
 import { Api } from "./api";
 import { APIClient } from "./api-client";
 import { HTTP_STATUS, PERFORMANCE_THRESHOLDS } from "./constants";
-import { MockAPIRequestContext } from "../tests/api/mock-request-context";
+import { getRequestContext } from "./api-context-manager";
 import { PayloadBuilder } from "../modules/data/payload-builder";
 
 export interface ApiTestOptions {
@@ -16,6 +16,8 @@ export interface ApiTestOptions {
   validParams?: Record<string, any>;
   validBody?: Record<string, any>;
   extraTests?: (getApi: () => Api) => void;
+  // contract tests might require mocking
+  isContractTest?: boolean;
 }
 
 export function createApiTest(options: ApiTestOptions) {
@@ -27,6 +29,7 @@ export function createApiTest(options: ApiTestOptions) {
     validParams,
     validBody,
     extraTests,
+    isContractTest = false,
   } = options;
 
   test.describe(title, { tag: ["@api", "@generated"] }, () => {
@@ -42,8 +45,8 @@ export function createApiTest(options: ApiTestOptions) {
 
     test.beforeEach(async ({ request }) => {
       const baseURL = test.info().project.use.baseURL || "";
-      const mockRequest = new MockAPIRequestContext();
-      api = new Api(mockRequest as any, baseURL);
+      const requestContext = getRequestContext(request, isContractTest);
+      api = new Api(requestContext, baseURL);
       api.path(endpoint);
     });
 

@@ -1,0 +1,23 @@
+let's work with this test.
+I want to have 20 tests for that endpoint. Create a folder. spread within files with no more than 100 lines.
+take as an example `v2.locations.spec.ts` test file.
+create ajv schema, Create separate folder for them best practice - we will have a lot of them so build proper folder structure.
+
+
+"tests/api/megaport-virtual-edge-mve/v2-product-mve-productUid"
+all test in this folder.
+Dedicate work with ajv to a separate class.
+
+
+1. move mveSchema as a constructor parameter.
+    const validator = new SchemaValidator();
+    const validateSchema = validator.compile(mveSchema);
+
+2. move this to the api class into getBody method. ajvSchema must be as an api class property and method setAjvSchema()
+          const valid = validateSchema(body);
+          expect(valid, JSON.stringify(validateSchema.errors)).toBeTruthy();
+
+
+3. Hold the map array of compiled schemas for speed optimization and key - is the path to the file.
+
+

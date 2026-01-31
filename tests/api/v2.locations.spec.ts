@@ -14,7 +14,7 @@ import {
 } from "../../utils/constants";
 import locationsSchema from "../../fixtures/mocks/locations-schema.json";
 import expectedSingaporeLocations from "../../fixtures/expected-locations/singapore-metro.json";
-import { MockAPIRequestContext } from "./mock-request-context";
+import { getRequestContext } from "../../utils/api-context-manager";
 
 /**
  * Comprehensive API Test Suite for /v2/locations endpoint
@@ -59,8 +59,8 @@ test.describe(
 
     test.beforeEach(async ({ request }) => {
       const baseURL = test.info().project.use.baseURL || "";
-      const mockRequest = new MockAPIRequestContext();
-      api = new Api(mockRequest as any, baseURL);
+      const requestContext = getRequestContext(request);
+      api = new Api(requestContext, baseURL);
       api.path(API_ENDPOINTS.LOCATIONS);
     });
 

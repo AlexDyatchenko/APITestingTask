@@ -1,6 +1,7 @@
 import { APIRequestContext, APIResponse } from "@playwright/test";
 import { PayloadBuilder } from "../modules/data/payload-builder";
 import { expect } from "@playwright/test";
+import { SchemaValidator } from "./schema-validator";
 
 let storedToken: string | null = null;
 
@@ -13,13 +14,26 @@ export class Api {
   private requestParams: any = undefined;
   private requestBody: any = undefined;
   private requestHeaders: Record<string, string> = {};
+  
+  // Validation related
+  private schemaValidator: SchemaValidator;
+  private currentSchema: object | null = null;
+  private currentSchemaKey: string = "";
 
   constructor(
     public requestContext: APIRequestContext,
     public baseURL: string = "",
     private expectedStatus: number = -1,
     private getToken: boolean = true,
-  ) {}
+  ) {
+    this.schemaValidator = new SchemaValidator();
+  }
+
+  setAjvSchema(schema: object, key: string): this {
+    this.currentSchema = schema;
+    this.currentSchemaKey = key;
+    return this;
+  }
 
   private getAutoMappedStatus(method: string): number {
     switch (method.toUpperCase()) {
@@ -301,7 +315,15 @@ export class Api {
   }
 
   async getBody<T = any>(): Promise<T> {
-    return await this.getResponse().json();
+    const body = await this.getResponse().json();
+    
+    // Auto-validate schema if one is set
+    if (this.currentSchema && this.currentSchemaKey) {
+      const { isValid, errors } = this.schemaValidator.validate(this.currentSchema, body, this.currentSchemaKey);
+      expect(isValid, `Schema validation failed for ${this.currentSchemaKey}:\n ${errors}`).toBeTruthy();
+    }
+    
+    return body;
   }
 
   /**

@@ -1,0 +1,146 @@
+{
+    "type": "object",
+    "required": [
+        "message",
+        "terms",
+        "data"
+    ],
+    "properties": {
+        "message": {
+            "type": "string"
+        },
+        "terms": {
+            "type": "string"
+        },
+        "data": {
+            "type": "object",
+            "required": [
+                "serviceName",
+                "name",
+                "costCentre",
+                "productUid"
+            ],
+            "properties": {
+                "serviceName": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "name": {
+                    "type": "string",
+                    "minLength": 1
+                },
+                "costCentre": {
+                    "type": "string"
+                },
+                "productUid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "technicalServiceId": {
+                    "type": "integer"
+                },
+                "technicalServiceUid": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "requestedDate": {
+                    "type": "integer"
+                },
+                "configuredDate": {
+                    "type": "integer"
+                },
+                "companyName": {
+                    "type": "string"
+                },
+                "companyId": {
+                    "type": "integer"
+                },
+                "lagPrimary": {
+                    "type": "boolean"
+                },
+                "billableId": {
+                    "type": "integer"
+                },
+                "billableUsageAlgorithm": {
+                    "type": "string"
+                },
+                "productType": {
+                    "type": "string",
+                    "enum": [
+                        "MVE",
+                        "VXC",
+                        "IX",
+                        "CX"
+                    ]
+                },
+                "provisioningStatus": {
+                    "type": "string"
+                },
+                "inAdvanceBillingStatus": {
+                    "type": "string"
+                },
+                "provisioningItems": {
+                    "type": "array"
+                },
+                "tags": {
+                    "type": "array"
+                },
+                "marketplaceVisibility": {
+                    "type": "boolean"
+                },
+                "vxcPermitted": {
+                    "type": "boolean"
+                },
+                "vxcAutoApproval": {
+                    "type": "boolean"
+                },
+                "createDate": {
+                    "type": "integer"
+                },
+                "contractStartDate": {
+                    "type": "integer"
+                },
+                "contractTermMonths": {
+                    "type": "integer"
+                },
+                "rateType": {
+                    "type": "string"
+                },
+                "trialAgreement": {
+                    "type": "boolean"
+                },
+                "prooductSpeed": {
+                    "type": "string"
+                },
+                "market": {
+                    "type": "string"
+                },
+                "components": {
+                    "type": "array"
+                },
+                "attributes": {
+                    "type": "array"
+                },
+                "attributeTags": {
+                    "type": "object"
+                },
+                "createdBy": {
+                    "type": "string",
+                    "format": "uuid"
+                },
+                "buyoutPort": {
+                    "type": "boolean"
+                },
+                "virtual": {
+                    "type": "boolean"
+                },
+                "locked": {
+                    "type": "boolean"
+                },
+                "adminLocked": {
+                    "type": "boolean"
+                }
+            }
+        }
+    }
+}
